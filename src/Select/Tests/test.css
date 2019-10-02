@@ -1,0 +1,29 @@
+.root-container {
+    background-color: rgb(130, 160, 160);
+    margin-bottom: 50px;
+    padding: 20px;
+    box-shadow: inset 0 0 15px 6px rgba(0, 0, 0, 0.24);
+}
+.root-container.multi {
+    background-color: rgb(185, 146, 110);
+}
+
+.root-container h1 {
+    color: #000;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.root-container .columns {
+    display:flex;
+}
+
+.root-container .columns > div {
+    flex: 1;
+    padding: 20px;
+}
+
+.root-container div.buttons {
+    margin-top: 20px;
+}
