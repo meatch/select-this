@@ -1,0 +1,11 @@
+{
+  "name": "select-this",
+  "version": "0.0.5",
+  "description": "ADA Compliant Select Menus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mitch Gohman",
+  "license": "ISC"
+}

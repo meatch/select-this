@@ -1,0 +1,7 @@
+/vendor
+/node_modules
+/bootstrap/cache/*
+.env
+.idea
+.php_cs.cache
+.vscode
