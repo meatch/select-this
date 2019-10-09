@@ -10,4 +10,7 @@ export const Actions = {
 
     UNDO_RESTORE: 'UNDO_RESTORE',
     UNDO_SAVE_ITEMS: 'UNDO_SAVE_ITEMS',
+
+    // Updating errors for select
+    UPDATE_ERRORS: 'UPDATE_ERRORS',
 };

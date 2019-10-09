@@ -17,6 +17,14 @@ const selectReducer = (selectState, action) => {
             };
         }
 
+        // Updates error state
+        case Actions.UPDATE_ERRORS: {
+            return {
+                ...selectState,
+                errors: action.errors,
+            };
+        }
+
         /*---------------------------
         | Selected Items
         ---------------------------*/
@@ -82,7 +90,6 @@ const selectReducer = (selectState, action) => {
                 itemsSelectedSaved: [...selectState.itemsSelected],
             };
         }
-
 
         default: {
             return selectState;

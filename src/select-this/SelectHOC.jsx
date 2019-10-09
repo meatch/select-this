@@ -12,6 +12,7 @@ import { clickOutside } from '../../../../utils/click_outside';
 
 import HiddenInputs from './components/HiddenInputs';
 import BtnHero from './components/BtnHero';
+import InlineError from '../../../../components/common/inline_error';
 
 import classnames from 'classnames';
 import keycode from 'keycode';
@@ -48,11 +49,12 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
 
             // Alignment of dropdown list and pyramid that visually connects modal to btnHeroText
             alignModal = 'right',
+            errorName,
+            errors,
 
             // Return State to Parent
             onSelected = () => { return; },
         } = props;
-
 
         /*---------------------------
         | Prop Grooming
@@ -122,6 +124,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             btnHeroText: theButtonHeroText,
             modalHasOpened: false,
             modalIsOpen: false,
+            customErrors: false,
             items: items,
             itemsSelected: itemsSelected,
             itemsSelectedSaved: itemsSelected,
@@ -131,6 +134,8 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             },
             selectRange: theSelectRange,
             injectHiddenInputs: injectHiddenInputs,
+            errors: errors,
+            errorName: errorName,
         };
 
         const [selectState, dispatch] = useReducer(selectReducer, defaultState);
@@ -148,6 +153,10 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
         ---------------------------*/
         const handleContinue = () => {
             dispatch({type: Actions.SHOW_MODAL, showModal: false});
+        };
+
+        const updateErrors = () => {
+            dispatch({type: Actions.UPDATE_ERRORS, errors: errors });
         };
 
         // Only initialize once
@@ -214,7 +223,9 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
                     // if (firstListItem) {
                     //     firstListItem.focus();
                     // }
-                    dispatch({type: Actions.FOCUS_ITEM_UPDATE, item: selectState.items[0]});
+                    if (selectState.items[0]) {
+                        dispatch({type: Actions.FOCUS_ITEM_UPDATE, item: selectState.items[0]});
+                    }
                     // window.scrollTo(x, y);
 
                     // Add class to Body to manage scrollbars for small view full screen when multi
@@ -277,7 +288,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
         useEffect(() => {
             const uID = (selectState.focusedItem.uID) ? selectState.focusedItem.uID:'0';
             if (uID !== '0') {
-                const menuListItems = menuRef.current.querySelectorAll('li');
+                const menuListItems = (menuRef.current) ? menuRef.current.querySelectorAll('li'):null;
                 if (menuListItems) {
                     menuListItems.forEach(listItem => {
                         if (listItem.dataset.uid.toString() === uID.toString()) {
@@ -289,7 +300,13 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             }
         }, [selectState.focusedItem]);
 
-        /*---------------------------itemsSelected
+        useEffect(() => {
+            if(!selectState.customErrors){
+                updateErrors();
+            }
+        }, [props.errors]);
+
+        /*---------------------------
         | Props management
         ---------------------------*/
         const itemCount = (selectState.itemsSelected) ? selectState.itemsSelected.length:0;
@@ -334,7 +351,6 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             'SelectMenu': true,
             [selectType]: true,
             'modalIsOpen': selectState.modalIsOpen,
-            'multipleSelect': true,
             'reachedMax': reachedMax,
             [rootClassName]: rootClassName,
             [`modal-align-${alignModal}`]: true,
@@ -387,6 +403,11 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
                             </div>
                         }
                     </div>
+
+                    <InlineError
+                        name={ errorName }
+                        errorMsg={ errors }
+                    />
                 </div>
             </SelectContext.Provider>
         );

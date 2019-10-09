@@ -1,12 +1,52 @@
 {
-  "name": "select-this",
-  "version": "0.0.5",
-  "description": "ADA Compliant Select Menus",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Mitch Gohman",
-  "license": "ISC",
-  "homepage": "https://github.com/meatch/select-this"
+    "name": "select-this",
+    "version": "0.0.7",
+    "description": "ADA Compliant Select Menus",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "author": "Mitch Gohman",
+    "license": "ISC",
+    "homepage": "https://github.com/meatch/select-this",
+    "babel": {
+        "presets": [
+            "@babel/react"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/meatch/select-this.git"
+    },
+    "private": false,
+    "peerDependencies": {
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2",
+        "react-scripts": "3.2.0"
+    },
+    "devDependencies": {
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2",
+        "react-scripts": "3.2.0"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "publish:npm": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/select-this --out-dir dist --copy-files"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
