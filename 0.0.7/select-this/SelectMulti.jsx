@@ -23,7 +23,7 @@
  * @constant {string} label aria-label for select menu component [defaults to btnHeroText]
  * @constant {boolean} labelSrOnly hidden from sighted users, for screen reader only.
  * @constant {string} title user firendly title, will override inputname when generating defaults
- * @constant {string} btnHeroText string for the button toggle when no items are selected [falls back to capitalized and spaced inputName ]
+ * @constant {string} btnHeroText: default display text when nothing is selected, fallsback to title if not provided [optional]
  * @constant {string} headerTitle Text displayed in Header of menu modal
  * @constant {string} multiMessage Text displayed in multi select to let the user know how many they have selected [defaults to Items Selected]
  * @constant {string} btnContinueText Text displayed in continue/confirm button

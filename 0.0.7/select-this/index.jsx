@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const SelectThis = (props) => {
     const children = props.children
@@ -7,7 +7,7 @@ const SelectThis = (props) => {
     
     return (
         <div>
-            <h1>Select This YOE!</h1>
+            <h1>Select This YO!</h1>
             {children}
         </div>
     );

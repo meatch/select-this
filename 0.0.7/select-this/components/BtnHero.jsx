@@ -3,14 +3,8 @@ import SelectContext from '../js/SelectContext';
 import keycode from 'keycode';
 import classnames from 'classnames';
 
-import {toggleErrorStatus} from '../../../../../travel_home/utils/inline_error_managment';
-import { useWindowSizeChange } from '../../../../booking-flow/order-rail/hooks/useWindowSizeChange';
-
 const BtnHero = React.forwardRef(({multiMessage, btnHeroToggle}, btnHeroRef) => {
-    let isMobileView = useWindowSizeChange('isMobileView');
     const { selectState } = useContext(SelectContext);
-
-    const hasError = (state, input) => !!toggleErrorStatus(state, input);
 
     const handleKeyDown = (e) => {
         switch(keycode(e)) {
@@ -66,13 +60,12 @@ const BtnHero = React.forwardRef(({multiMessage, btnHeroToggle}, btnHeroRef) => 
             currentSelections = (itemCount > 1) ? ` Current selections are ${itemNames}`: ` Current selection is ${itemNames}`;
         }
 
-        return `${selectState.ariaLabel} popover toggle button. ${ !isMobileView ? `Press enter to make ${toMakeASelection} and use arrow keys to navigate. ` : ''}${currentSelections}`;
+        return `${selectState.ariaLabel} popover toggle button. Press enter to make ${toMakeASelection} and use arrow keys to navigate. ${currentSelections}`;
     };
 
     const btnClassName = classnames({
         'BtnHero': true,
-        'deafultText': selectState.itemsSelected.length < 1,
-        'not-valid': hasError(selectState.errors, selectState.errorName),
+        'defaultText': selectState.itemsSelected.length < 1,
     });
 
     return (
@@ -85,10 +78,10 @@ const BtnHero = React.forwardRef(({multiMessage, btnHeroToggle}, btnHeroRef) => 
             tab-index={ 0 }
             ref={ btnHeroRef }
             aria-haspopup='true'
-            aria-invalid={ () => {hasError(selectState.errors, selectState.errorName);} }
             aria-describedby={ `id-error-${selectState.errorName}` }
             aria-controls={ `MenuModalPanel-${selectState.id}` }
             aria-expanded={ selectState.modalIsOpen }
+            data-aut={ selectState.dataAut }
 
         >
             <span className={ 'display-text' }>{ renderDisplayText() }</span>

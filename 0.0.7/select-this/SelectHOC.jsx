@@ -5,17 +5,16 @@
  */
 import React, { useEffect, useRef, useReducer }  from 'react';
 
+import classnames from 'classnames';
+import keycode from 'keycode';
+
 import selectReducer from './js/selectReducer';
 import SelectContext from './js/SelectContext';
 import { Actions } from './js/selectActions';
-import { clickOutside } from '../../../../utils/click_outside';
+import { clickOutside } from './js/clickOutside';
 
 import HiddenInputs from './components/HiddenInputs';
 import BtnHero from './components/BtnHero';
-import InlineError from '../../../../components/common/inline_error';
-
-import classnames from 'classnames';
-import keycode from 'keycode';
 
 // Apparently Component.defaultProps will be deprecated in favor of default parameters
 // https://bit.ly/2lWaEfR
@@ -54,6 +53,9 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
 
             // Return State to Parent
             onSelected = () => { return; },
+
+            // Added Data Attribute for Automation
+            dataAut = null,
         } = props;
 
         /*---------------------------
@@ -83,32 +85,50 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
         let theID = (id) ? id : inputName.replace(' ', '') + '-123456';
 
         /* Items ---------------------------*/
+        // make sure it exists, if its a single object, return array of single object
+        const itemsIncomingCheck = (items) => {
+            if (!!items) {
+                return  (!Array.isArray(items)) ? [items]: items;
+            }
+            return []; //return empty array
+        }
+
         const generateUID = (itemValue, idx) => {
-            // console.log('Gen UID Item value', itemValue);
             return itemValue.toString().replace(' ', '') + '_' + idx;
         };
 
         const groomItem = (item, idx) => {
             // Add Selectable if not provided
-            if (item.selectable === undefined) {
+            if (!item.hasOwnProperty('selectable')) {
                 item.selectable = true;
             }
 
-            // add unique ID to each item if one was not provided
-            if (!item.uID) {
+            // Add unique ID to each item if one was not provided
+            if (!item.hasOwnProperty('uID')) {
                 item.uID = generateUID(item.value, idx);
             }
+
+            return item;
         };
 
-        items.forEach((item, idx) => {
-            item.subItems && item.subItems.forEach((subItem, subIdx) => {
-                groomItem(subItem, `sub_${subIdx}`);
+        const groomItems = (newItems) => {
+
+            const groomedItems = itemsIncomingCheck(newItems);
+
+            return groomedItems.map((item, idx) => {
+                if (item.subItems) {
+
+                    item.subItems = itemsIncomingCheck(item.subItems).map((subItem, subIdx) => {
+                        return groomItem(subItem, `sub_${subIdx}`);
+                    });
+                }
+                return groomItem(item, idx);
             });
 
-            groomItem(item, idx);
-        });
+        }
+        const groomedItems = groomItems(items);
 
-        const itemsSelected = (!Array.isArray(setDefaultItems)) ? [setDefaultItems]: setDefaultItems;
+        let itemsSelected = [];
 
         /*---------------------------
         | Look ma, no Redux
@@ -125,7 +145,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             modalHasOpened: false,
             modalIsOpen: false,
             customErrors: false,
-            items: items,
+            items: groomedItems,
             itemsSelected: itemsSelected,
             itemsSelectedSaved: itemsSelected,
             focusedItem: {
@@ -136,6 +156,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             injectHiddenInputs: injectHiddenInputs,
             errors: errors,
             errorName: errorName,
+            dataAut: dataAut,
         };
 
         const [selectState, dispatch] = useReducer(selectReducer, defaultState);
@@ -172,11 +193,38 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
             dispatch({type: Actions.ITEMS_REPLACE, itemsSelected: selected});
         };
 
-        // componedntDidMount and componentDidUpdate
-        useEffect(() => {
-            if (props.setSelectedItems === undefined) { return; }
+        const getFromItems = (itemNeedle, itemsArray) => {
+            const foundItem = itemsArray.find(item => {
+                if (itemNeedle.uID) {
+                    return (itemNeedle.uID === item.uID);
+                }
+                // Alright, if you did not give us a uID we will try another way
+                return (itemNeedle.displayText === item.displayText);
+            });
+            // Do not want to return undefined, the return of FIND.
+            return (foundItem) ? foundItem:false;
+        }
 
-            const itemsToSelect = (!Array.isArray(props.setSelectedItems)) ? [props.setSelectedItems]: props.setSelectedItems;
+        // componentDidUpdate for setDefaultItems
+        useEffect(()=>{
+            const itemNeedles = itemsIncomingCheck(setDefaultItems);
+            const defaultItems = itemNeedles.reduce((result, itemNeedle) => {
+                const foundItem = getFromItems(itemNeedle, selectState.items);
+                if (foundItem) {
+                    result.push(foundItem);
+                }
+                return result;
+            }, []);
+
+            replaceSelectedItems(defaultItems);
+            dispatch({type: Actions.UNDO_SAVE_ITEMS});
+        }, [props.setDefaultItems]);
+
+        // componentDidUpdate for setSelectedItems
+        useEffect(() => {
+            if (!props.setSelectedItems) { return; }
+
+            const itemsToSelect = itemsIncomingCheck(props.setSelectedItems);
             const hasUID = (itemsToSelect[0] && itemsToSelect[0].uID) ? true:false;
 
             // Map against augmented list items (e.g. added uIDs)
@@ -195,6 +243,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
 
             // See if setSelectedItems prop provided has changed
             if (JSON.stringify(selected[0]) !== JSON.stringify(selectState.itemsSelected[0])) {
+
                 replaceSelectedItems(selected);
             }
         }, [props.setSelectedItems]);
@@ -307,6 +356,41 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
         }, [props.errors]);
 
         /*---------------------------
+        | Whenever the Items Array changes, perform these tasks. e.g. ajax calls, or dynamic lists
+        ---------------------------*/
+        useEffect(() => {
+            // We need to update anytime the array has changed, not just length
+            if (props.items && JSON.stringify(selectState.items) !== JSON.stringify(props.items)) {
+
+                // Groom New Items (e.g. adding uID if there is none)
+                const newItems = groomItems(props.items);
+
+                // if Not Every Selected Item is in New Array
+                const isEverySelectedInNewArray = selectState.itemsSelected.every((selectedItem) => {
+                    return newItems.find(newItem => {
+                        return selectedItem.uID === newItem.uID;
+                    });
+                });
+
+                if (!isEverySelectedInNewArray) {
+                    const itemNeedles = itemsIncomingCheck(props.setDefaultItems);
+
+                    const newSelected = itemNeedles.map(itemNeedle => {
+                        return getFromItems(itemNeedle, selectState.items);
+                    });
+
+                    // Update with newSelected
+                    replaceSelectedItems(newSelected);
+
+                }
+
+                dispatch({type: Actions.UPDATE_ITEMS, items: newItems});
+                dispatch({type: Actions.UNDO_SAVE_ITEMS});
+
+            }
+        }, [props.items]);
+
+        /*---------------------------
         | Props management
         ---------------------------*/
         const itemCount = (selectState.itemsSelected) ? selectState.itemsSelected.length:0;
@@ -403,11 +487,6 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
                             </div>
                         }
                     </div>
-
-                    <InlineError
-                        name={ errorName }
-                        errorMsg={ errors }
-                    />
                 </div>
             </SelectContext.Provider>
         );

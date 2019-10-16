@@ -4,16 +4,14 @@
     span.ariaLabel {
         display: block;
         text-align: left;
-        line-height: 100%;
+        line-height: 1.2;
         margin-bottom: 8px;
-        
-        color: @primaryMagenta;
-        font-family: @secondaryFont;
+
+        color: magenta;
+        font-family: Georgia;
 
         font-size: 15px;
-        @media @medium { font-size: 15px; }
-        @media @large { font-size: 16px; }
-        
+
         text-transform: lowercase;
         &::first-letter {
             text-transform: uppercase;
@@ -24,9 +22,9 @@
         .BtnHero {
             display: block;
             width: 100%;
-            font-family: @mainFont;
-            background-color: @white;
-            border: 2px solid @borderGrey;
+            font-family: Helvetica;
+            background-color: white;
+            border: 2px solid gray;
             border-radius: 2px;
             padding: 0px 10px;
             font-size: 15px;
@@ -43,10 +41,10 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 margin-right: 20px;
-                line-height: 100%;
+                line-height: 1.2;
             }
 
-            &.deafultText {
+            &.defaultText {
                 span.display-text {
                     text-transform: lowercase;
                     &::first-letter {
@@ -54,17 +52,17 @@
                     }
                 }
             }
-                    
+
             position: relative;
             .glyphicon-menu-down {
                 position: absolute;
                 right: 12px;
-                
+
                 top: 50%;
                 transform: translate(0, -50%) rotate(0deg);
 
                 font-size: 16px;
-                color: @borderGrey;
+                color: #999;
                 cursor: pointer;
 
                 transition: all .3s;
@@ -77,11 +75,11 @@
             }
 
             &:focus {
-                border-color: @darkTeal;
+                border-color: teal;
             }
-        }       
+        }
     }
-    
+
     /*---------------------------
     | MenuModal Pyramid (Dog Ear Tab at Top ^)
     ---------------------------*/
@@ -100,24 +98,24 @@
                 border-left: 12px solid transparent;
                 border-right: 12px solid transparent;
                 z-index: 1;
-                
+
                 top: -1px;
-                border-bottom: 12px solid @wellFargoGrey;
+                border-bottom: 12px solid gray;
             }
             &::after {
                 top: 0px;
-                border-bottom-color: @lightGrey;
+                border-bottom-color: #eee;
             }
         }
 
         // modalAlign Horizontal
-        &.modal-align-left    .MenuModal::before, 
+        &.modal-align-left    .MenuModal::before,
         &.modal-align-left    .MenuModal::after    { left: 9px;  }
-        
-        &.modal-align-right   .MenuModal::before, 
+
+        &.modal-align-right   .MenuModal::before,
         &.modal-align-right   .MenuModal::after    { right: 9px; }
 
-        &.modal-align-center  .MenuModal::before, 
+        &.modal-align-center  .MenuModal::before,
         &.modal-align-center  .MenuModal::after    { left: 50%;  transform: translateX(-50%); }
     }
 
@@ -127,13 +125,13 @@
     // modalAlign Horizontal
     &.modal-align-left .MenuModal { left: 0px; }
     &.modal-align-right .MenuModal { right: 0px; }
-    &.modal-align-center .MenuModal { 
+    &.modal-align-center .MenuModal {
         left: 50%;
-        transform: translateX(-50%); 
+        transform: translateX(-50%);
     }
 
     .MenuModal {
-        position: absolute; 
+        position: absolute;
         top: 100%;
         z-index: 250;
         width: 321px;
@@ -141,10 +139,10 @@
         // outline: dotted purple 2px;
 
         .MenuModalPanel {
-        
-            background-color: @lightGrey;
+
+            background-color: #eee;
             border-radius: 5px;
-            border: 1px solid @wellFargoGrey;
+            border: 1px solid gray;
 
             margin-top: 10px;
             position: relative;
@@ -152,8 +150,8 @@
             header, footer { padding: 16px; }
 
             header {
-                color: @darkgrey;
-                font-family: @mainFont;
+                color: #333;
+                font-family: Helvetica;
 
                 button.close {
                     display: block;
@@ -163,8 +161,8 @@
                     top: 16px; right: 16px;
 
                     width: 22px; height: 22px;
-                    
-                    color: @darkgrey;
+
+                    color: #333;
                     background-image: url(/img/closeLrg_black.png);
                     background-size: contain;
                     background-color: transparent;
@@ -174,7 +172,7 @@
                 }
                 h2 {
                     margin: 12px 0 0;
-                    color: @darkgrey;
+                    color: #333;
                     font-size: 18px;
                     font-weight: bold;
                     span.title {
@@ -182,17 +180,17 @@
                     }
                 }
                 aside {
-                    line-height: 100%;
+                    line-height: 1.2;
                     font-size: 11px;
 
-                    .reachedMax { 
+                    .reachedMax {
                         font-weight: bold;
-                        color: @black;
+                        color: black;
                     }
                     .clearAll {
                         cursor: pointer;
-                        color: @darkTeal;
-                        font-family: @mainFont;
+                        color: teal;
+                        font-family: Helvetica;
                         margin-left: 12px;
                     }
 
@@ -205,7 +203,7 @@
 
                 * {
                     &:focus {
-                        outline: dotted 2px @darkgrey;
+                        outline: dotted 2px #333;
                     }
                 }
 
@@ -233,7 +231,7 @@
 .SelectMenu.Single {
     .MenuModal {
         .main {
-            padding: 8px 0; 
+            padding: 8px 0;
             max-height: 300px;
             ul {
                 margin: 0;
@@ -248,15 +246,15 @@
                         display: block;
                         line-height: 28px;
                         font-size: 13px;
-                        font-family: @mainFont;
-                        color: @darkgrey;
+                        font-family: Helvetica;
+                        color: #333;
                         padding-left: 16px;
 
                     }
                     &.isSelectable {
                         &:hover, &:active {
                             span.title {
-                                color: @white;
+                                color: white;
                                 background-color: #4385a7;
                             }
                         }
@@ -269,10 +267,10 @@
                             padding-left: 32px;
                         }
                     }
-                    
+
                     &.isSelected > span.title {
-                        color: @white;
-                        background-color: @darkTeal;
+                        color: white;
+                        background-color: teal;
                     }
 
                     &.hasChildren > span.title {
@@ -290,12 +288,12 @@
 .SelectMenu.Multi {
     .MenuModal {
         .main {
-            padding: 0; 
+            padding: 0;
             max-height: 300px;
             ul {
                 margin: 0;
                 padding: 0;
-                border-bottom: solid 1px @borderGrey;
+                border-bottom: solid 1px #999;
 
                 li {
                     list-style-type: none;
@@ -304,22 +302,22 @@
                         display: block;
                         line-height: 42px;
                         font-size: 14px;
-                        font-family: @mainFont;
-                        color: @darkgrey;
+                        font-family: Helvetica;
+                        color: #333;
                         cursor: pointer;
-                        
-                        border-top: solid 1px @borderGrey;
-                        
+
+                        border-top: solid 1px #999;
+
                         // margin: 0px -16px;
                         padding: 0px 16px;
                     }
-                    
+
                     &.isSelected::after {
                         content: "";
-                        width: 21px; 
+                        width: 21px;
                         height: 14px;
                         display: block;
-                        
+
                         position: absolute;
                         right: 16px;
                         top: 50%;
@@ -332,14 +330,14 @@
                     &.isSelectable {
                         &:hover, &:active {
                             span.title {
-                                color: @white;
+                                color: white;
                                 background-color: #4385a7;
                             }
                         }
                         &.isSelected {
                             span.title {
-                                color: @white;
-                                background-color: @darkTeal;
+                                color: white;
+                                background-color: teal;
                             }
                         }
                     }
@@ -353,7 +351,7 @@
 /*---------------------------
 | Small Full Screen Mode :: Only used in Multi Select menus.
 ---------------------------*/
-@media @small {
+@media screen and (max-width: 768px) {
     body.SelectMenu-modalIsOpen {
         // remove extra scrollbars
         overflow: hidden;
@@ -365,7 +363,7 @@
         }
         .MenuModalPanel {
             position: fixed;
-            left: 0; right: 0; top: 0; bottom: 0; 
+            left: 0; right: 0; top: 0; bottom: 0;
             width: auto;
             border-radius: 0;
             border: none;
@@ -375,13 +373,13 @@
 
             > header {
                 position: fixed;
-                top: 0; left: 0; right: 0; 
+                top: 0; left: 0; right: 0;
                 height: 85px;
             }
             > .main {
                 position: fixed;
-                top: 85px; bottom: 85px; 
-                left: 0; right: 0; 
+                top: 85px; bottom: 85px;
+                left: 0; right: 0;
                 max-height: none;
                 width: auto;
 
@@ -390,7 +388,7 @@
             }
             > footer {
                 position: fixed;
-                bottom: 0; left: 0; right: 0; 
+                bottom: 0; left: 0; right: 0;
                 height: 85px;
 
 

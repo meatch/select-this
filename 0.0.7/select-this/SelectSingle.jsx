@@ -19,8 +19,9 @@
  * @constant {object|array} setDefaultItems takes ${listitem} or array of ${listitem}s to set default selected
  * @constant {object|array} setSelectedItems takes ${listitem} or array of ${listitem}s to update selected
  * @constant {string} rootClassName adding class for additional CSS and JS targeting
- * @constant {string} id unique ID for aria labelling
+ * @constant {string} id unique ID for aria labeling
  * @constant {string} label aria-label for select menu component [defaults to btnHeroText]
+ * @constant {string} btnHeroText: default display text when nothing is selected, fallsback to title if not provided [optional]
  * @constant {boolean} labelSrOnly hidden from sighted users, for screen reader only.
  * @constant {string} title user friendly title, will override inputname when generating defaults
  * @constant {string} alignModal [right|left|center] Where would you like tyhe modal to align [defaults to right]

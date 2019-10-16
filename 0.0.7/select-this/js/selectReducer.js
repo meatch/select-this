@@ -25,6 +25,14 @@ const selectReducer = (selectState, action) => {
             };
         }
 
+        // Update default items
+        case Actions.UPDATE_ITEMS: {
+            return {
+                ...selectState,
+                items: action.items,
+            };
+        }
+
         /*---------------------------
         | Selected Items
         ---------------------------*/
