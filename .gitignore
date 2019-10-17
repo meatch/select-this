@@ -5,6 +5,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/_BUILDER
 
 # testing
 /coverage
@@ -15,6 +16,10 @@
 # misc
 .DS_Store
 .vscode
+
+#Guides/Documentation
+guide.sh
+/dist-docs
 
 # envioronment
 .env.local

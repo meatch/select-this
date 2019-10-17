@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
     webpackConfig: {
         module: {
@@ -10,4 +12,9 @@ module.exports = {
             ]
         }
     },
+    title: "Select This Docs",
+    styleguideDir: "dist-docs",
+    moduleAliases: {
+        "select-this": path.resolve(__dirname, "src")
+    }
 };

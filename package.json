@@ -10,6 +10,7 @@
     "scripts": {
         "test": "jest",
         "start": "styleguidist server",
+        "docs:build": "styleguidist build",
         "build": "rollup -c",
         "prepublishOnly": "rm -rf lib && yarn build",
         "postbuild": "yarn pack && tar -xvzf *.tgz && rm -rf package *.tgz"
