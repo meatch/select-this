@@ -2,51 +2,41 @@
     "name": "select-this",
     "version": "0.0.7",
     "description": "ADA Compliant Select Menus",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
+    "main": "lib/index.js",
+    "module": "lib/index.js",
     "author": "Mitch Gohman",
-    "license": "ISC",
     "homepage": "https://github.com/meatch/select-this",
-    "babel": {
-        "presets": [
-            "@babel/react"
-        ]
+    "scripts": {
+        "test": "jest",
+        "start": "styleguidist server",
+        "build": "rollup -c",
+        "publish:npm": "SET NODE_ENV=production && rm -rf lib && mkdir lib && npx babel src/select-this --out-dir lib --copy-files"
     },
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/meatch/select-this.git"
     },
-    "private": false,
     "peerDependencies": {
-        "react": "^16.10.2",
-        "react-dom": "^16.10.2",
-        "react-scripts": "3.2.0"
+        "react": "^16.x",
+        "react-dom": "^16.x"
     },
     "devDependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/preset-env": "^7.6.3",
+        "@babel/preset-react": "^7.6.3",
+        "@testing-library/react": "^9.3.0",
+        "babel-loader": "^8.0.6",
+        "babel-plugin-module-resolver": "^3.2.0",
+        "jest": "^24.9.0",
         "react": "^16.10.2",
         "react-dom": "^16.10.2",
-        "react-scripts": "3.2.0"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "publish:npm": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/select-this --out-dir dist --copy-files"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+        "react-styleguidist": "^9.2.0",
+        "rollup": "^1.24.0",
+        "rollup-plugin-babel": "^4.3.3",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-peer-deps-external": "^2.2.0",
+        "webpack": "^4.41.2"
     }
 }
