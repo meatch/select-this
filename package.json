@@ -1,16 +1,18 @@
 {
     "name": "select-this",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "ADA Compliant Select Menus",
     "main": "lib/index.js",
-    "module": "lib/index.js",
+    "browser": "lib/index.umd.js",
+    "module": "lib/index.es.js",
     "author": "Mitch Gohman",
     "homepage": "https://github.com/meatch/select-this",
     "scripts": {
         "test": "jest",
         "start": "styleguidist server",
         "build": "rollup -c",
-        "publish:npm": "SET NODE_ENV=production && rm -rf lib && mkdir lib && npx babel src/select-this --out-dir lib --copy-files"
+        "prepublishOnly": "rm -rf lib && yarn build",
+        "postbuild": "yarn pack && tar -xvzf *.tgz && rm -rf package *.tgz"
     },
     "license": "MIT",
     "repository": {
@@ -37,6 +39,7 @@
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-peer-deps-external": "^2.2.0",
+        "rollup-plugin-terser": "^5.1.2",
         "rollup-plugin-uglify": "^6.0.3",
         "webpack": "^4.41.2"
     }
