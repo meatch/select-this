@@ -5,6 +5,7 @@ import external from "rollup-plugin-peer-deps-external";
 
 import packageJSON from './package.json';
 const input = "./src/index.js";
+const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, ".min.js");
 
 export default [
     // Common JS
@@ -12,6 +13,21 @@ export default [
         input,
         output: {
             file: packageJSON.main,
+            format: "cjs"
+        },
+        plugins: [
+            babel({
+                exclude: "node_modules/**"
+            }),
+            external(),
+            resolve(),
+            commonjs()
+        ]
+    },
+    {
+        input,
+        output: {
+            file: minifyExtension(packageJSON.main),
             format: "cjs"
         },
         plugins: [
