@@ -2,9 +2,9 @@
 
 ## Structure
 
-### Single Select
-```
-<Wrapper>
+### SelectSingle
+```jsx
+<SelectSingle>
     <HiddenInputs />
     <ButtonDisplayText>
     <Menu>
@@ -12,12 +12,12 @@
             <Item />
         </Items>
     </Menu>
-</Wrapper>
+</SelectSingle>
 ```
 
-### Multi Select
-```
-<Wrapper>
+### SelectMulti
+```jsx
+<SelectMulti>
     <HiddenInputs />
     <ButtonDisplayText />
     <Menu>
@@ -33,13 +33,13 @@
             <Continue />
         </Footer>
     </Menu>
-</Wrapper>
+</SelectMulti>
 ```
 
 ## Definitions
 
-### <Wrapper />
-Wraps entire component in single container
+### <SelectSingle /> and <SelectMulti />
+Wraps everything in a container
 
 ### <HiddenInputs />
 Optional hidden inputs that reflect selected items
