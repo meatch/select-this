@@ -20,10 +20,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs()
         ]
     },
@@ -36,10 +37,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs(),
             uglify()
         ]
@@ -60,10 +62,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs()
         ]
     },
@@ -82,10 +85,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs(),
             terser()
         ]
@@ -101,10 +105,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs()
         ]
     },
@@ -118,10 +123,11 @@ export default [
         },
         plugins: [
             babel({
-                exclude: "node_modules/**"
+                exclude: "node_modules/**",
+                presets: ['@babel/env', '@babel/preset-react']
             }),
             external(),
-            resolve(),
+            resolve({extensions: [ '.js', '.jsx', '.json' ]}),
             commonjs(),
             terser()
         ]
