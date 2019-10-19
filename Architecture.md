@@ -38,37 +38,37 @@
 
 ## Definitions
 
-### <SelectSingle /> and <SelectMulti />
+### `<SelectSingle />` and `<SelectMulti />`
 Wraps everything in a container
 
-### <HiddenInputs />
+### `<HiddenInputs />`
 Optional hidden inputs that reflect selected items
 
-### <ButtonDisplayText />
+### `<ButtonDisplayText />`
 This is the clickable button that toggles the menu and displays 
 default text or chosen item(s)
 
 toggle (click, enter, space, typeahead selection)
 
-### <Menu />
+### `<Menu />`
 Wraps the menu components (header, list, and footer)
 
 handles Keyboard listeners for menu (e.g.tabbing, arrows, enter, 
  space)
 
-### <Items />
+### `<Items />`
 Contains all items
 
-### <Item />
+### `<Item />`
 A single item
 
 handles select item (click, space, enter)
 handles focus of list items (arrow keys)
 
-### <Header /> MultiSelect only
+### `<Header />` MultiSelect only
 Contains title, state of choices, and close button in a Multi Select menu
 
-### <Footer /> MultiSelect only
+### `<Footer />` MultiSelect only
 Contains continue button
 
 
