@@ -1,6 +1,6 @@
 import { render, getByText, fireEvent } from "@testing-library/react";
 import React from 'react';
-import Title from 'Title/Title';
+import Title from './Title';
 
 describe("Title", () => {
     test("Should return Title", () => {

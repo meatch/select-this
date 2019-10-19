@@ -1,6 +1,6 @@
 import { render, getByText, fireEvent } from "@testing-library/react";
 import React from 'react';
-import Item from 'Item/Item';
+import Item from './Item';
 
 describe("Item", () => {
     test("Should return Item", () => {

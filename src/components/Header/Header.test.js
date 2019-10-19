@@ -1,6 +1,6 @@
 import { render, getByText, fireEvent } from "@testing-library/react";
 import React from 'react';
-import Header from 'Header/Header';
+import Header from './Header';
 
 describe("Header", () => {
     test("Should return Header", () => {

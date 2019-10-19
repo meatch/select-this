@@ -1,6 +1,6 @@
 import { render, getByText, fireEvent } from "@testing-library/react";
 import React from 'react';
-import SelectMulti from 'SelectMulti/SelectMulti';
+import SelectMulti from './SelectMulti';
 
 describe("SelectMulti", () => {
     test("Should return SelectMulti", () => {
