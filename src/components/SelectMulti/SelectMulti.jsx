@@ -1,9 +1,37 @@
 import React from 'react';
+import classnames from 'classnames';
 
-const SelectMulti = () => {
+import HiddenInputs from '../HiddenInputs/HiddenInputs.jsx';
+import ButtonDisplayText from '../ButtonDisplayText/ButtonDisplayText.jsx';
+
+import Header from '../Header/Header.jsx';
+import Items from '../Items/Items.jsx';
+import Footer from '../Footer/Footer.jsx';
+
+const SelectMulti = SelectHOC(() => {
+
+    /*---------------------------
+    | Classnames
+    ---------------------------*/
+    const selectMultiClassName = classnames({
+        'SelectMulti': true,
+    });
+    const menuClassName = classnames({
+        'Menu': true,
+    });
+
     return (
-        <div>SelectMulti</div>
+        <div className={ selectMultiClassName }>
+            SelectMulti
+            <Header />
+            <HiddenInputs />
+            <ButtonDisplayText />
+            <div className={ menuClassName }>
+                <Items />
+            </div>
+            <Footer />
+        </div>
     );
-}
+});
 
 export default SelectMulti;
