@@ -1,20 +1,34 @@
-import React from 'react';
-import Item from '../Item/Item.jsx';
+import React, { useContext } from 'react';
+import selectContext from '../../context/selectContext';
+
 import classnames from 'classnames';
 
+import Item from '../Item/Item.jsx';
+
 const Items = React.forwardRef((props, itemsRef) => {
+
+
+    const { selectState, dispatch } = useContext(selectContext);
 
     const theClassName = classnames({
         'Items': true,
     });
+
     return (
-        <div 
+        <ul 
             ref={ itemsRef }
             className={ theClassName }
+            
+            role={ 'listbox' }
+            tabIndex={ '0' }
+            aria-activedescendant={ ( selectState.focusedItem.uID) ? `listitem_uID_${selectState.focusedItem.uID}` : null }
         >
-            Items
-            <Item />
-        </div>
+            {
+                selectState.items.map((item, idx) => {
+                    return <Item key={ idx } item={ item } />
+                })
+            }
+        </ul>
     );
 });
 

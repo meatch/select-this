@@ -1,18 +1,15 @@
-import { useContext } from 'react';
-import selectContext from './selectContext';
 import { actionTypes } from './selectActionTypes';
 
+export const itemClick = (item, dispatch) => {
 
-export const actionCreator = () => {
+    const selectable = (item.selectable) ? !!item.selectable : true;
 
-    console.log('Action Creator');
-
-    const { selectState, dispatch } = useContext(selectContext);
-
-    console.log('Current selectState', selectState);
-
-    dispatch({
-        type: actionTypes.SOME_UPPERCASE_ACTION_TYPE, 
-        someProp: someValue
-    });
+    if (selectable) {
+        item.selected = !item.selected;
+        
+        dispatch({
+            type: actionTypes.ITEM_UPDATE,
+            item: item
+        });
+    }
 }

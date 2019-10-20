@@ -62,6 +62,20 @@ const SelectHOC = (WrappedComponent, selectType) => {
         const [ selectState, dispatch ] = useReducer(selectReducer, defaultStore);
 
         /*---------------------------
+        | Lifecycle Event Listeners
+        ---------------------------*/
+        // componentDidMount
+        useEffect(() => {
+            // console.log('componentDidMount');
+        }, []);
+
+        // componentDidUpdate
+        useEffect(() => {
+            // console.log('componentDidUpdate');
+        });
+
+
+        /*---------------------------
         | DOM Refs with Hooks, no way
         | Using this to manage DOM focus on children - ADA Babay
         ---------------------------*/        
@@ -104,7 +118,6 @@ const SelectHOC = (WrappedComponent, selectType) => {
         );
     }
 
-
     /*---------------------------
     | Set Default Props
     ---------------------------*/
@@ -124,10 +137,11 @@ const SelectHOC = (WrappedComponent, selectType) => {
                 uID: 100, //unique identifier for each item, required to keep them distinct
                 value: 'This is the Value of the Item',
                 displayText: 'What the User Sees for this Item',
-                selected: false,
                 
                 # Optional Props and their defaults
+                selected: false,
                 selectable: true,
+                tier: 'tier1', // in case you wish to add sub items - due to current state of ADA it flattens out, but classes are assigned for styling.
             },
             ...
         ]
