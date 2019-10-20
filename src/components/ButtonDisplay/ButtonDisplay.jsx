@@ -1,9 +1,13 @@
 import React from 'react';
 
-const ButtonDisplay = () => {
+const ButtonDisplay = React.forwardRef((props, buttonDisplayRef) => {
     return (
-        <div>ButtonDisplay</div>
+        <button
+            ref={ buttonDisplayRef }
+        >
+            ButtonDisplay
+        </button>
     );
-}
+});
 
 export default ButtonDisplay;

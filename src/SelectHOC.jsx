@@ -62,6 +62,13 @@ const SelectHOC = (WrappedComponent, selectType) => {
         const [ selectState, dispatch ] = useReducer(selectReducer, defaultStore);
 
         /*---------------------------
+        | DOM Refs with Hooks, no way
+        | Using this to manage DOM focus on children - ADA Babay
+        ---------------------------*/        
+        const buttonDisplayRef = useRef(null);
+        const itemsRef = useRef(null);
+
+        /*---------------------------
         | Classnames
         ---------------------------*/
         const rootClassName = classnames({
@@ -88,7 +95,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
                 <div id={ id } className={ rootClassName }>
                     <HiddenInputs />
                     <AriaLabel />
-                    <ButtonDisplay />
+                    <ButtonDisplay ref={ buttonDisplayRef } />
                     <div className={ menuClassName }>
                         <WrappedComponent { ...props } />
                     </div>
