@@ -1,34 +1,11 @@
 import React from 'react';
-import SelectHOC from '../../hocs/SelectHOC/SelectHOC';
-
-import classnames from 'classnames';
-
-import HiddenInputs from '../HiddenInputs/HiddenInputs.jsx';
-import ButtonDisplayText from '../ButtonDisplayText/ButtonDisplayText.jsx';   
+import SelectHOC from '../../SelectHOC';
 import Items from '../Items/Items.jsx';
 
 const SelectSingle = SelectHOC((props) => {
-
-    /*---------------------------
-    | Classnames
-    ---------------------------*/
-    const selectSingleClassName = classnames({
-        'SelectSingle': true,
-    });
-    const menuClassName = classnames({
-        'Menu': true,
-    });
-
     return (
-        <div className={ selectSingleClassName }>
-            SelectSingle
-            <HiddenInputs />
-            <ButtonDisplayText />
-            <div className={ menuClassName }>
-                <Items />
-            </div>
-        </div>
+        <Items />
     );
-});
+}, 'SelectSingle');
 
 export default SelectSingle;
