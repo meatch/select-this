@@ -6,6 +6,7 @@
 ```jsx
 <SelectSingle>
     <HiddenInputs />
+    <AriaLabel />
     <ButtonDisplay>
     <div className={ 'menu' }>
         <Items>
@@ -19,6 +20,7 @@
 ```jsx
 <SelectMulti>
     <HiddenInputs />
+    <AriaLabel />
     <ButtonDisplay />
     <div className={ 'menu' }>
         <Header>
@@ -43,6 +45,9 @@ Wraps everything in a container
 
 ### `<HiddenInputs />`
 Optional hidden inputs that reflect selected items
+
+### `<AriaLabel />`
+Accessibility Label, can be hidden for SR Only.
 
 ### `<ButtonDisplay />`
 This is the clickable button that toggles the menu and displays 
