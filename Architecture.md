@@ -7,11 +7,11 @@
 <SelectSingle>
     <HiddenInputs />
     <ButtonDisplayText>
-    <Menu>
+    <div className={ 'menu' }>
         <Items>
             <Item />
         </Items>
-    </Menu>
+    </div>
 </SelectSingle>
 ```
 
@@ -20,7 +20,7 @@
 <SelectMulti>
     <HiddenInputs />
     <ButtonDisplayText />
-    <Menu>
+    <div className={ 'menu' }>
         <Header>
             <Close />
             <Title />
@@ -32,7 +32,7 @@
         <Footer>
             <Continue />
         </Footer>
-    </Menu>
+    </div>
 </SelectMulti>
 ```
 
