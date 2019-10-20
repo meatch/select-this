@@ -4,7 +4,7 @@ import Header from '../Header/Header.jsx';
 import Items from '../Items/Items.jsx';
 import Footer from '../Footer/Footer.jsx';
 
-const SelectMulti = SelectHOC((props) => {
+export const SelectMulti = SelectHOC((props) => {
     return (
         <>
             <Header />
@@ -13,5 +13,3 @@ const SelectMulti = SelectHOC((props) => {
         </>
     );
 }, 'SelectMulti');
-
-export default SelectMulti;
