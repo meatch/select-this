@@ -12,7 +12,6 @@ import ButtonDisplay from './components/ButtonDisplay/ButtonDisplay';
 
 const SelectHOC = (WrappedComponent, selectType) => {
     const SelectHOCWrapper = (props) => {
-
         const {
             items,
             id,
@@ -81,12 +80,26 @@ const SelectHOC = (WrappedComponent, selectType) => {
             selectActions.itemsSet(props.items, dispatch);
         }, [props.items]);
 
+        /*---------------------------
+        | Event Listeners
+        ---------------------------*/
+        const selectThisKeyDown = (e) => {
+            switch(keycode(e)) {
+                case 'esc':
+                    e.preventDefault();
+                    selectActions.setModalOpenState(false, dispatch);
+                    break;
+                default:
+                    return;
+            }
+        }
 
         /*---------------------------
         | DOM Refs with Hooks, no way
         | Using this to manage DOM focus on children - ADA Babay
         ---------------------------*/        
         const buttonDisplayRef = useRef(null);
+        const menuRef = useRef(null);
         const itemsRef = useRef(null);
 
         /*---------------------------
@@ -104,21 +117,33 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
             [additionalClassName]: additionalClassName,
         });
-        const menuClassName = classnames({
-            'Menu': true,
-        });
 
         /*---------------------------
         | Render
         ---------------------------*/
         return (
             <selectContext.Provider value={ { selectState, dispatch } }>
-                <div id={ id } className={ rootClassName }>
+                <div
+                    id={ id }
+                    className={ rootClassName }
+                    onKeyDown={ selectThisKeyDown }
+                >
                     { injectHiddenInputs && <HiddenInputs />}
                     <AriaLabel />
                     <ButtonDisplay ref={ buttonDisplayRef } />
-                    <div className={ menuClassName }>
-                        <WrappedComponent { ...props } />
+
+                    <div
+                        className='MenuModalWrapper'
+                        hidden={ !selectState.modalIsOpen }
+                    >
+                        {
+                            selectState.modalIsOpen &&
+                            <div className={ 'MenuModal' }>
+                                <div ref={ menuRef } className={ 'Menu' }>
+                                    <WrappedComponent { ...props } />
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </selectContext.Provider>

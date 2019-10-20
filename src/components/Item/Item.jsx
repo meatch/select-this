@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 
@@ -61,7 +60,7 @@ const Item = ({item}) => {
             data-value={ item.value }
             
             onClick={ itemClick }
-            onKeyDown={ (e) => { itemKeyDown(e); }  }
+            onKeyDown={ itemKeyDown }
 
         >
             { item.displayText }

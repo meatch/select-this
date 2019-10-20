@@ -1,5 +1,18 @@
 import { actionTypes } from './selectActionTypes';
 
+/*---------------------------
+| Modal
+---------------------------*/
+export const setModalOpenState = (modalIsOpen, dispatch) => {
+    dispatch({
+        type: actionTypes.MODAL_SHOW,
+        modalIsOpen: modalIsOpen,
+    });
+}
+
+/*---------------------------
+| Items
+---------------------------*/
 // Initialize, Replace or Restore Items
 export const itemsSet = (items, dispatch) => {
     dispatch({
@@ -16,7 +29,6 @@ export const itemsSave = (items, dispatch) => {
         itemsSaved: JSON.parse(JSON.stringify(items)),
     });
 }
-
 export const itemClick = (item, selectState, dispatch) => {
 
     const selectable = (item.selectable) ? !!item.selectable : true;
