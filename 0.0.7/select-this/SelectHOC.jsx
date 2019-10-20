@@ -477,12 +477,7 @@ const SelectHOC = (WrappedComponent, selectType='Multi') => {
                             selectState.modalIsOpen &&
                             <div className={ 'MenuModal' } onKeyDown={ handleMenuModalKeyDown }>
                                 <div id={ `MenuModalPanel-${selectState.id}` } className={ 'MenuModalPanel' }>
-                                    <WrappedComponent
-                                        ref={ menuRef }
-                                        handleClose={ handleClose }
-                                        handleContinue={ handleContinue }
-                                        { ...props }
-                                    />
+                                    <WrappedComponent { ...props } />
                                 </div>
                             </div>
                         }

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useRef, useReducer } from 'react';
 import selectContext from '../../context/selectContext';
-import classnames from 'classnames';
+import selectReducer from '../../context/selectReducer';
 import keycode from 'keycode';
 
-
 const SelectHOC = (WrappedComponent) => {
+    return (...props) => {
+        
+        const defaultState = {
+            items: ['Fruity pebbles'],
+        };
 
-    return (
-        <selectContext.Provider value={ { selectState, dispatch } }>
-            SelectHOC
-            <WrappedComponent { ...props } />
-        </selectContext.Provider>
-    );
+        const [ selectState, dispatch ] = useReducer(selectReducer, defaultState);
+
+        return (
+                <selectContext.Provider value={ { selectState, dispatch } }>
+                    <WrappedComponent { ...props } />
+                </selectContext.Provider>
+        );
+    }
 }
 
 export default SelectHOC;

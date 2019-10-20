@@ -1,6 +1,6 @@
 {
     "name": "select-this",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "ADA Compliant Select Menus",
     "main": "lib/index.js",
     "browser": "lib/index.umd.js",
