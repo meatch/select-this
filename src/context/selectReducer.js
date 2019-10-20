@@ -3,18 +3,12 @@ import { actionTypes } from './selectActionTypes';
 const selectReducer = (selectState, action) => {
     switch(action.type) {
 
-        case (actionTypes.ITEM_UPDATE): {
-            // replace item with updated item
-            const items = selectState.items.map(item => {
-                if (item.uID === action.item.uID) {
-                    return action.item;
-                }
-                return item;
-            });
-
+        case (actionTypes.ITEMS_UPDATE): {
             return {
                 ...selectState,
-                items: items,
+                items: action.items,
+                reachedMax: action.reachedMax,
+                reachedMin: action.reachedMin,
             };
         }
         default: {

@@ -41,8 +41,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
         | Default Store/Object Shape
         ---------------------------*/
         const defaultStore = {
-            items: items,
-            itemsSaved: items,
+            items: JSON.parse(JSON.stringify(items)),
+            itemsSaved: JSON.parse(JSON.stringify(items)),
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item`,
             modalIsOpen: false,
             focusedItem: {

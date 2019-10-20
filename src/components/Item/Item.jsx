@@ -8,7 +8,7 @@ import keycode from 'keycode';
 
 const Item = ({item}) => {
 
-    const { dispatch } = useContext(selectContext);
+    const { selectState, dispatch } = useContext(selectContext);
 
     const tier = (item.tier) ? item.tier : 'tier1';
     const isSelected = (item.selected) ? !!item.selected : false;
@@ -18,7 +18,7 @@ const Item = ({item}) => {
     | Item Handlers
     ---------------------------*/
     const itemClick = () => {
-        selectActions.itemClick(item, dispatch);
+        selectActions.itemClick(item, selectState, dispatch);
     }
 
     const itemKeyDown = (e) => {
