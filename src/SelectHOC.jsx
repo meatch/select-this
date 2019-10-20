@@ -22,6 +22,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             buttonDisplayTextDefault,
             alignModal,
             additionalClassName,
+            injectHiddenInputs,
         } = props;
 
         /*---------------------------
@@ -107,7 +108,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         return (
             <selectContext.Provider value={ { selectState, dispatch } }>
                 <div id={ id } className={ rootClassName }>
-                    <HiddenInputs />
+                    { injectHiddenInputs && <HiddenInputs />}
                     <AriaLabel />
                     <ButtonDisplay ref={ buttonDisplayRef } />
                     <div className={ menuClassName }>
@@ -149,7 +150,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         items: [], //master list of options and their current selected state
         
         // Hidden Inputs
-        inputName: 'item', //for hidden input(s) and standard form submission
+        inputName: 'selectThisItem', //for hidden input(s) and standard form submission
         injectHiddenInputs: false,
 
         // ButtonDisplay
