@@ -1,5 +1,22 @@
 import { actionTypes } from './selectActionTypes';
 
+// Initialize, Replace or Restore Items
+export const itemsSet = (items, dispatch) => {
+    dispatch({
+        type: actionTypes.ITEMS_SET,
+        items: JSON.parse(JSON.stringify(items)),
+    });
+    // Whenever Items are set or replace, we also need to save the current state of items.
+    itemsSave(items, dispatch);
+}
+
+export const itemsSave = (items, dispatch) => {
+    dispatch({
+        type: actionTypes.ITEMS_SAVE,
+        itemsSaved: JSON.parse(JSON.stringify(items)),
+    });
+}
+
 export const itemClick = (item, selectState, dispatch) => {
 
     const selectable = (item.selectable) ? !!item.selectable : true;

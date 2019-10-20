@@ -41,8 +41,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
         | Default Store/Object Shape
         ---------------------------*/
         const defaultStore = {
-            items: JSON.parse(JSON.stringify(items)),
-            itemsSaved: JSON.parse(JSON.stringify(items)),
+            items: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
+            itemsSaved: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item`,
             modalIsOpen: false,
             focusedItem: {
@@ -74,6 +74,12 @@ const SelectHOC = (WrappedComponent, selectType) => {
         useEffect(() => {
             // console.log('componentDidUpdate');
         });
+
+        // props.items watch
+        useEffect(() => {
+            console.log('Items Set and Saved');
+            selectActions.itemsSet(props.items, dispatch);
+        }, [props.items]);
 
 
         /*---------------------------
