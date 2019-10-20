@@ -6,7 +6,7 @@
 ```jsx
 <SelectSingle>
     <HiddenInputs />
-    <ButtonDisplayText>
+    <ButtonDisplay>
     <div className={ 'menu' }>
         <Items>
             <Item />
@@ -19,7 +19,7 @@
 ```jsx
 <SelectMulti>
     <HiddenInputs />
-    <ButtonDisplayText />
+    <ButtonDisplay />
     <div className={ 'menu' }>
         <Header>
             <Close />
@@ -44,7 +44,7 @@ Wraps everything in a container
 ### `<HiddenInputs />`
 Optional hidden inputs that reflect selected items
 
-### `<ButtonDisplayText />`
+### `<ButtonDisplay />`
 This is the clickable button that toggles the menu and displays 
 default text or chosen item(s)
 
