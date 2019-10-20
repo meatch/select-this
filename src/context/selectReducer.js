@@ -1,4 +1,4 @@
-// import { actionTypes } from './selectActionTypes';
+import { actionTypes } from './selectActionTypes';
 
 const selectReducer = (selectState, action) => {
     switch(action.type) {
