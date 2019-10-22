@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
+import styled from "@emotion/styled";
 
 import classnames from 'classnames';
 import keycode from 'keycode';
@@ -48,7 +49,7 @@ const Item = ({item}) => {
     const itemUniqueIDKey = `listitem_uID_${item.uID}`;
 
     return (
-        <li
+        <ItemStyled
             id={ itemUniqueIDKey }
             className={ theItemClassName }
 
@@ -64,8 +65,47 @@ const Item = ({item}) => {
 
         >
             { item.displayText }
-        </li>
+        </ItemStyled>
     );
 }
 
 export default Item;
+
+
+/*---------------------------
+| Styles
+---------------------------*/
+const ItemStyled = styled.li`
+    list-style-type: none;
+    position: relative;
+    cursor: pointer;
+
+    display: block;
+    line-height: 28px;
+    font-size: 13px;
+    font-family: Helvetica;
+    color: #333;
+    padding-left: 16px;
+
+    &.isSelectable {
+        &:hover, &:active {
+            color: white;
+            background-color: #4385a7;
+            outline: none;
+        }
+    }
+
+    &.tier2 {
+        font-weight: normal;
+        padding-left: 32px;
+    }
+
+    &.isSelected {
+        color: white;
+        background-color: teal;
+    }
+
+    &.hasChildren {
+        font-weight: bold;
+    }
+`;

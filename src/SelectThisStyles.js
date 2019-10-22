@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 
 export const SelectThis = styled.div`
-    border: solid 1px red;
-    
     font-family: Helvetica;
     position: relative;
     width: 100%;

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
+import styled from "@emotion/styled";
 
 import classnames from 'classnames';
 
@@ -15,7 +16,7 @@ const Items = React.forwardRef((props, itemsRef) => {
     });
 
     return (
-        <ul 
+        <ItemsStyled
             ref={ itemsRef }
             className={ theClassName }
             
@@ -28,8 +29,16 @@ const Items = React.forwardRef((props, itemsRef) => {
                     return <Item key={ idx } item={ item } />
                 })
             }
-        </ul>
+        </ItemsStyled>
     );
 });
 
 export default Items;
+
+/*---------------------------
+| Styles
+---------------------------*/
+const ItemsStyled = styled.ul`
+    margin: 0;
+    padding: 0;
+`;
