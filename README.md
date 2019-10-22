@@ -1,4 +1,4 @@
-# Select This
+# SelectThis
 
 A NPM package for ADA Compliant Select Menus.
 
@@ -39,6 +39,9 @@ This library was inspired by the following libraries. We were running into Voice
 
 * [react-aria-menubutton](https://github.com/davidtheclark/react-aria-menubutton)
 * [DownShift](https://www.npmjs.com/package/downshift)
+
+### My Teammates
+This was battle tested in our web applications by several ba's, devs, and qa. Without my team, I would not be where I am today, and neither would this package.
 
 ### github icons
 https://gist.github.com/rxaviers/7360908
