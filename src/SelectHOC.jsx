@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useReducer } from 'react';
+import { useId } from "react-id-generator";
 import selectContext from './context/selectContext';
 import selectReducer from './context/selectReducer';
 import * as selectActions from './context/selectActions';
+
+import { SelectThis } from './SelectThisStyles';
 
 import keycode from 'keycode';
 import classnames from 'classnames';
@@ -16,7 +19,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             items,
             id,
             label, 
-            min, 
+            min,
             max,
             buttonDisplayTextDefault,
             alignModal,
@@ -113,28 +116,46 @@ const SelectHOC = (WrappedComponent, selectType) => {
             'reachedMax': selectState.reachedMax,
             'reachedMin': selectState.reachedMin,
 
+
             [`modal-align-${alignModal}`]: true,
 
             [additionalClassName]: additionalClassName,
         });
+
+
+        /*---------------------------
+        | Unique IDs
+        ---------------------------*/
+        const [uniqueID] = useId();
+        const theID = (id) ? id : `SelectThis${uniqueID}`;
+        const labelID = `${theID}-AriaLabel`;
+        const menuModalId = `${theID}-MenuModal`;
+
 
         /*---------------------------
         | Render
         ---------------------------*/
         return (
             <selectContext.Provider value={ { selectState, dispatch } }>
-                <div
-                    id={ id }
+                <SelectThis
+                    id={ theID }
                     className={ rootClassName }
                     onKeyDown={ selectThisKeyDown }
                 >
                     { injectHiddenInputs && <HiddenInputs />}
-                    <AriaLabel />
-                    <ButtonDisplay ref={ buttonDisplayRef } />
+                    <AriaLabel
+                        labelID={ labelID }
+                    />
+                    <ButtonDisplay
+                        labelID={ labelID }
+                        menuModalId={ menuModalId }
+                        ref={ buttonDisplayRef }
+                    />
 
                     <div
                         className='MenuModalWrapper'
                         hidden={ !selectState.modalIsOpen }
+                        id={ menuModalId }
                     >
                         {
                             selectState.modalIsOpen &&
@@ -145,7 +166,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
                             </div>
                         }
                     </div>
-                </div>
+                </SelectThis>
             </selectContext.Provider>
         );
     }
