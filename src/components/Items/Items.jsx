@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import styled from "@emotion/styled";
-
 import classnames from 'classnames';
-
 import Item from '../Item/Item.jsx';
 
 const Items = React.forwardRef((props, itemsRef) => {
