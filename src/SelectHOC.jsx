@@ -13,6 +13,7 @@ import HiddenInputs from './components/HiddenInputs/HiddenInputs';
 import AriaLabel from './components/AriaLabel/AriaLabel';
 import ButtonDisplay from './components/ButtonDisplay/ButtonDisplay';
 import MenuModalWrapper from './components/MenuModalWrapper/MenuModalWrapper';
+import MenuModal from './components/MenuModal/MenuModal';
 
 const SelectHOC = (WrappedComponent, selectType) => {
     const SelectHOCWrapper = (props) => {
@@ -150,15 +151,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
                         menuModalId={ menuModalId }
                         ref={ buttonDisplayRef }
                     />
-                    <MenuModalWrapper menuModalId={ menuModalId }>
-                        {
-                            selectState.modalIsOpen &&
-                            <div className={ 'MenuModal' }>
-                                <div ref={ menuRef } className={ 'Menu' }>
-                                    <WrappedComponent { ...props } />
-                                </div>
-                            </div>
-                        }
+                    <MenuModalWrapper menuModalId={ menuModalId } ref={ menuRef }>
+                        <WrappedComponent { ...props } />
                     </MenuModalWrapper>
                 </SelectThis>
             </selectContext.Provider>
