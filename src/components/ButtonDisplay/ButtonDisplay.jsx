@@ -3,9 +3,15 @@ import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import * as helpers from '../../utilities/helpers';
 import styled from "@emotion/styled";
+import { colors, fonts } from '../../styles';
 
 import classnames from 'classnames';
 import keycode from 'keycode';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faAngleDown
+} from '@fortawesome/free-solid-svg-icons';
 
 const ButtonDisplay = React.forwardRef(({ labelID, menuModalId }, buttonDisplayRef) => {
 
@@ -90,7 +96,8 @@ const ButtonDisplay = React.forwardRef(({ labelID, menuModalId }, buttonDisplayR
                 onClick={ buttonClick }
                 onKeyDown={ buttonKeyDown }
             >
-                <span>{ selectState.buttonDisplayText }</span>
+                <span className={ 'text' }>{ selectState.buttonDisplayText }</span>
+                <span className={ 'caret' }><FontAwesomeIcon icon={faAngleDown} /></span>
             </button>
         </ButtonDisplayStyled>
     );
@@ -104,14 +111,15 @@ export default ButtonDisplay;
 const ButtonDisplayStyled = styled.div`
     height: 44px;
     button {
+        font-size: 18px;
+        color: ${colors.neutral.semiDark};
+        border: 2px solid ${colors.neutral.mid};
+        background-color: ${colors.white};
+
         display: block;
         width: 100%;
-        background-color: white;
-        border: 2px solid gray;
         border-radius: 2px;
         padding: 0px 10px;
-        font-size: 15px;
-        color: #525252;
         margin: 0px;
         height: 100%;
 
@@ -119,7 +127,7 @@ const ButtonDisplayStyled = styled.div`
         align-items: center;
         overflow: hidden;
 
-        span {
+        span.text {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -128,7 +136,7 @@ const ButtonDisplayStyled = styled.div`
         }
 
         &.defaultText {
-            span {
+            span.text {
                 text-transform: lowercase;
                 &::first-letter {
                     text-transform: uppercase;
@@ -137,28 +145,38 @@ const ButtonDisplayStyled = styled.div`
         }
 
         position: relative;
-        /* .glyphicon-menu-down {
+        span.caret {
             position: absolute;
-            right: 12px;
+            right: 6px;
+            width: 30px;
+            height: 30px;
 
             top: 50%;
             transform: translate(0, -50%) rotate(0deg);
 
             font-size: 16px;
-            color: #999;
             cursor: pointer;
 
             transition: all .3s;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
         }
 
         &[aria-expanded="true"] {
-            .glyphicon-menu-down {
+            span.caret {
                 transform: translate(0, -50%) rotate(180deg);
             }
-        } */
+        }
 
-        &:focus {
-            border-color: teal;
+        &:focus, 
+        &:active, 
+        &:hover { 
+            outline: none;
+            color: ${colors.hue.semiDark};
+            border-color: ${colors.hue.semiDark};
         }
     }
 `;

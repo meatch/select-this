@@ -45,7 +45,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         const defaultStore = {
             items: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
             itemsSaved: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
-            buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item`,
+            buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item...`,
             modalIsOpen: false,
             focusedItem: {
                 uID: null,

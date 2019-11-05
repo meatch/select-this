@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import styled from "@emotion/styled";
+import { colors, fonts } from '../../styles';
 
 import classnames from 'classnames';
 import keycode from 'keycode';
@@ -76,21 +77,23 @@ export default Item;
 | Styles
 ---------------------------*/
 const ItemStyled = styled.li`
+    font-family: ${fonts.primary};
+    color: ${colors.neutral.mid};
+    
+    font-size: 13px;
+    line-height: 28px;
+
     list-style-type: none;
     position: relative;
     cursor: pointer;
 
     display: block;
-    line-height: 28px;
-    font-size: 13px;
-    font-family: Helvetica;
-    color: #333;
     padding-left: 16px;
 
     &.isSelectable {
         &:hover, &:active {
-            color: white;
-            background-color: #4385a7;
+            color: ${colors.neutral.dark};
+            background-color: ${colors.neutral.mid};
             outline: none;
         }
     }
@@ -101,8 +104,12 @@ const ItemStyled = styled.li`
     }
 
     &.isSelected {
-        color: white;
-        background-color: teal;
+        color: ${colors.white};
+        background-color: ${colors.hue.semiDark};
+        &:hover, &:active {
+            color: ${colors.white};
+            background-color: ${colors.hue.dark};
+        }
     }
 
     &.hasChildren {
