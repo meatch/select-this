@@ -89,9 +89,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
         // selectState.items watch - when component changes the selectState.items internal state
         useEffect(() => {
             console.log('Items from selectState has changed', selectState.items);
-
+            selectActions.renderButtonDisplayText(selectState, dispatch);
             onChange(selectState.items);
-
         }, [selectState.items]);
 
 

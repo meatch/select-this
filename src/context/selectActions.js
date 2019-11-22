@@ -1,17 +1,7 @@
 import { actionTypes } from './selectActionTypes';
 
 /*---------------------------
-| Modal
----------------------------*/
-export const setModalOpenState = (modalIsOpen, dispatch) => {
-    dispatch({
-        type: actionTypes.MODAL_SHOW,
-        modalIsOpen: modalIsOpen,
-    });
-}
-
-/*---------------------------
-| Items
+| selectState.items
 ---------------------------*/
 // Initialize, Replace or Restore Items
 export const itemsSet = (items, dispatch) => {
@@ -69,4 +59,38 @@ export const itemClick = (item, selectState, dispatch) => {
             });
         }
     }
+}
+
+/*---------------------------
+| selectState.modalIsOpen
+---------------------------*/
+export const setModalOpenState = (modalIsOpen, dispatch) => {
+    dispatch({
+        type: actionTypes.MODAL_SHOW,
+        modalIsOpen: modalIsOpen,
+    });
+}
+
+/*---------------------------
+| selectState.buttonDisplayText
+---------------------------*/
+export const renderButtonDisplayText = (selectState, dispatch) => {
+    let buttonDisplayText = selectState.buttonDisplayText;
+    
+    const selectedItems = selectState.items.filter((item) => {
+        return (item.selected);
+    });
+
+    const itemCount = selectedItems.length;
+    
+    if (itemCount > 1) {
+        buttonDisplayText = `${itemCount} ${selectState.originalProps.multiMessage}`;
+    }
+    else if (itemCount === 1) {
+        buttonDisplayText = selectedItems[0].displayText;
+    }
+    dispatch({
+        type: actionTypes.BUTTON_DISPLAY_TEXT_SET,
+        buttonDisplayText: buttonDisplayText,
+    });
 }

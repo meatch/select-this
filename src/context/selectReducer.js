@@ -2,18 +2,9 @@ import { actionTypes } from './selectActionTypes';
 
 const selectReducer = (selectState, action) => {
     switch(action.type) {
-        /*---------------------------
-        | Modal
-        ---------------------------*/
-        case (actionTypes.MODAL_SHOW): {
-            return {
-                ...selectState,
-                modalIsOpen: action.modalIsOpen,
-            };
-        }
 
         /*---------------------------
-        | Items
+        | selectState.items
         ---------------------------*/
         case (actionTypes.ITEMS_SET): {
             return {
@@ -37,7 +28,27 @@ const selectReducer = (selectState, action) => {
         }
 
         /*---------------------------
-        | Default
+        | selectState.modalIsOpen
+        ---------------------------*/
+        case (actionTypes.MODAL_SHOW): {
+            return {
+                ...selectState,
+                modalIsOpen: action.modalIsOpen,
+            };
+        }
+
+        /*---------------------------
+        | selectState.buttonDisplayText
+        ---------------------------*/
+        case (actionTypes.BUTTON_DISPLAY_TEXT_SET): {
+            return {
+                ...selectState,
+                buttonDisplayText: action.buttonDisplayText,
+            };
+        }
+
+        /*---------------------------
+        | selectState Default
         ---------------------------*/
         default: {
             return selectState;
