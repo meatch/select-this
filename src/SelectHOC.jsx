@@ -13,7 +13,6 @@ import HiddenInputs from './components/HiddenInputs/HiddenInputs';
 import AriaLabel from './components/AriaLabel/AriaLabel';
 import ButtonDisplay from './components/ButtonDisplay/ButtonDisplay';
 import MenuModalWrapper from './components/MenuModalWrapper/MenuModalWrapper';
-import MenuModal from './components/MenuModal/MenuModal';
 
 const SelectHOC = (WrappedComponent, selectType) => {
     const SelectHOCWrapper = (props) => {
@@ -27,6 +26,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             alignModal,
             additionalClassName,
             injectHiddenInputs,
+            onChange,
         } = props;
 
         /*---------------------------
@@ -79,11 +79,21 @@ const SelectHOC = (WrappedComponent, selectType) => {
             // console.log('componentDidUpdate');
         });
 
-        // props.items watch
+        // props.items watch - when developer changes items passed to component - overrides internal state
         useEffect(() => {
-            console.log('Items Set and Saved');
+            console.log('Items from Props Has Changed');
             selectActions.itemsSet(props.items, dispatch);
         }, [props.items]);
+
+
+        // selectState.items watch - when component changes the selectState.items internal state
+        useEffect(() => {
+            console.log('Items from selectState has changed', selectState.items);
+
+            onChange(selectState.items);
+
+        }, [selectState.items]);
+
 
         /*---------------------------
         | Event Listeners
@@ -105,7 +115,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         ---------------------------*/        
         const buttonDisplayRef = useRef(null);
         const menuRef = useRef(null);
-        const itemsRef = useRef(null);
+        // const itemsRef = useRef(null);
 
         /*---------------------------
         | Classnames
@@ -117,7 +127,6 @@ const SelectHOC = (WrappedComponent, selectType) => {
             'modalIsOpen': selectState.modalIsOpen,
             'reachedMax': selectState.reachedMax,
             'reachedMin': selectState.reachedMin,
-
 
             [`modal-align-${alignModal}`]: true,
 
@@ -200,7 +209,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         alignModal: 'right',
 
         // Return Items State to Parent
-        onSelected: () => { return; },
+        onChange: () => { return; },
 
         // SelectMulti
         multiMessage: 'Items Selected',

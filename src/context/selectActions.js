@@ -30,7 +30,6 @@ export const itemsSave = (items, dispatch) => {
     });
 }
 export const itemClick = (item, selectState, dispatch) => {
-
     const selectable = (item.selectable) ? !!item.selectable : true;
     const isSelectSingle = selectState.originalProps.selectType === 'SelectSingle';
 
