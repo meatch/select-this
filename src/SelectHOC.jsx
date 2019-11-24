@@ -218,8 +218,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
         // SelectMulti
         multiMessage: 'Items Selected',
-        min: null,
-        max: null,
+        min: 1,
+        max: 1,
     };
 
     return SelectHOCWrapper;

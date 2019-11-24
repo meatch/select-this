@@ -21,6 +21,27 @@ export const itemsSave = (items, dispatch) => {
         itemsSaved: JSON.parse(JSON.stringify(items)),
     });
 }
+
+export const itemsRestore = (itemsSaved, dispatch) => {
+    dispatch({
+        type: actionTypes.ITEMS_SET,
+        items: JSON.parse(JSON.stringify(itemsSaved)),
+    });
+}
+
+export const itemsClear = (items, dispatch) => {
+
+    const newItems = items.map((item) => {
+        item.selected = false;
+        return item;
+    });
+
+    dispatch({
+        type: actionTypes.ITEMS_SET,
+        items: newItems,
+    });
+}
+
 export const itemClick = (item, selectState, dispatch) => {
     const selectable = (item.selectable) ? !!item.selectable : true;
     const isSelectSingle = selectState.originalProps.selectType === 'SelectSingle';
