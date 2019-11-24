@@ -1,4 +1,6 @@
 import { actionTypes } from './selectActionTypes';
+import * as Helpers from '../utilities/helpers';
+
 
 /*---------------------------
 | selectState.items
@@ -33,10 +35,10 @@ export const itemClick = (item, selectState, dispatch) => {
         
         if (canUpdate) {
             const items = selectState.items.map((selectStateItem) => {
-                if (selectStateItem.uID === item.uID) {
+                if (selectStateItem.id === item.id) {
                     return item;
                 }
-
+                
                 // If single, replacement is welcome, so deselect all other items
                 if (isSelectSingle) {
                     selectStateItem.selected = false;
@@ -46,9 +48,7 @@ export const itemClick = (item, selectState, dispatch) => {
             });
 
             // Have we reached max or min?
-            const currentSelected = selectState.items.filter((selectStateItem) => {
-                return (!!selectStateItem.selected);
-            });
+            const currentSelected = Helpers.getSelectedItems(selectState.items);
             const currentSelectedCount = currentSelected.length;
 
             dispatch({

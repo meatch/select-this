@@ -47,7 +47,7 @@ const Item = ({item}) => {
     /*---------------------------
     | Used as reference to aria-activedescendant in UL root for ADA
     ---------------------------*/
-    const itemUniqueIDKey = `listitem_uID_${item.uID}`;
+    const itemUniqueIDKey = `listitem_id_${item.id}`;
 
     return (
         <ItemStyled
@@ -58,7 +58,7 @@ const Item = ({item}) => {
             aria-selected={ isSelected }
             tabIndex={ -1 }
 
-            data-uid={ item.uID }
+            data-uid={ item.id }
             data-value={ item.value }
             
             onClick={ itemClick }
@@ -71,7 +71,6 @@ const Item = ({item}) => {
 }
 
 export default Item;
-
 
 /*---------------------------
 | Styles

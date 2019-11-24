@@ -1,6 +1,8 @@
 import React from 'react';
 // import styled from "@emotion/styled";
 import classnames from 'classnames';
+import styled from "@emotion/styled";
+import { colors, fonts } from '../../styles';
 
 const Menu = React.forwardRef((props, menuRef) => {
     
@@ -11,13 +13,20 @@ const Menu = React.forwardRef((props, menuRef) => {
     });
 
     return (
-        <div
+        <MenuStyled
             ref={ menuRef }
             className={ theClassName }
         >
             {props.children}
-        </div>
+        </MenuStyled>
     );
 });
 
 export default Menu;
+
+/*---------------------------
+| Styles
+---------------------------*/
+const MenuStyled = styled.div`
+    padding: 10px 0px;
+`;

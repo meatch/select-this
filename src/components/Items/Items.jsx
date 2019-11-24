@@ -20,7 +20,7 @@ const Items = React.forwardRef((props, itemsRef) => {
             
             role={ 'listbox' }
             tabIndex={ '0' }
-            aria-activedescendant={ ( selectState.focusedItem.uID) ? `listitem_uID_${selectState.focusedItem.uID}` : null }
+            aria-activedescendant={ ( selectState.focusedItem.id) ? `listitem_id_${selectState.focusedItem.id}` : null }
         >
             {
                 selectState.items.map((item, idx) => {

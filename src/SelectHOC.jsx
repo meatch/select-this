@@ -50,7 +50,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item...`,
             modalIsOpen: false,
             focusedItem: {
-                uID: null,
+                id: null,
                 item: {},
             },
             reachedMax: false,
@@ -90,6 +90,12 @@ const SelectHOC = (WrappedComponent, selectType) => {
         useEffect(() => {
             console.log('Items from selectState has changed', selectState.items);
             selectActions.renderButtonDisplayText(selectState, dispatch);
+
+            // if single close menu
+            if (selectType === 'SelectSingle') {
+                selectActions.setModalOpenState(false, dispatch);
+            }
+
             onChange(selectState.items);
         }, [selectState.items]);
 
@@ -181,9 +187,9 @@ const SelectHOC = (WrappedComponent, selectType) => {
         labelSrOnly: null,
         
         /* Items: [
-            { 
+            {
                 # Required Props
-                uID: 100, //unique identifier for each item, required to keep them distinct
+                id: 100, //unique identifier for each item, required to keep them distinct
                 value: 'This is the Value of the Item',
                 displayText: 'What the User Sees for this Item',
                 
