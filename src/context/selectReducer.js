@@ -41,9 +41,26 @@ const selectReducer = (selectState, action) => {
         | selectState.buttonDisplayText
         ---------------------------*/
         case (actionTypes.BUTTON_DISPLAY_TEXT_SET): {
+
+            let buttonDisplayText = selectState.buttonDisplayText;
+            
+            const selectedItems = selectState.items.filter((item) => {
+                return (item.selected);
+            });
+
+            const itemCount = selectedItems.length;
+            
+            if (itemCount > 1) {
+                buttonDisplayText = `${itemCount} ${selectState.originalProps.multiMessage}`;
+            } else if (itemCount === 1) {
+                buttonDisplayText = selectedItems[0].displayText;
+            } else if (itemCount === 0)  {
+                buttonDisplayText = `${selectState.originalProps.buttonDisplayTextDefault}`;
+            }
+
             return {
                 ...selectState,
-                buttonDisplayText: action.buttonDisplayText,
+                buttonDisplayText: buttonDisplayText,
             };
         }
 

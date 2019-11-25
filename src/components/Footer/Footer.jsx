@@ -11,6 +11,11 @@ const Footer = () => {
 
     const { selectState, dispatch } = useContext(selectContext);
 
+    const handleContinue = () => {
+        selectActions.itemsSave(selectState.items, dispatch);
+        selectActions.setModalOpenState(false, dispatch);
+    }
+
     const handleContinueKeyDown = (e) => {
         const theKeyCode = keycode(e);
 
@@ -33,7 +38,16 @@ const Footer = () => {
 
     return (
         <FooterStyled>
-            Footer
+            <button
+                type={ 'button' }
+                className={ 'BtnContinue' }
+                tabIndex={ 0 }
+
+                onClick={ handleContinue }
+                onKeyDown={ handleContinueKeyDown }
+            >
+                { selectState.originalProps.btnContinueText }
+            </button>
         </FooterStyled>
     );
 }
@@ -45,4 +59,10 @@ export default Footer;
 ---------------------------*/
 const FooterStyled = styled.footer`
     padding: 16px;
+    box-shadow: 0 0 9px rgba(0,0,0,.3);
+
+    button {
+        font-size: 18px;
+        line-height: 48px;
+    }
 `;

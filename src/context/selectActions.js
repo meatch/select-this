@@ -1,7 +1,6 @@
 import { actionTypes } from './selectActionTypes';
 import * as Helpers from '../utilities/helpers';
 
-
 /*---------------------------
 | selectState.items
 ---------------------------*/
@@ -13,6 +12,8 @@ export const itemsSet = (items, dispatch) => {
     });
     // Whenever Items are set or replace, we also need to save the current state of items.
     itemsSave(items, dispatch);
+
+    renderButtonDisplayText(dispatch);
 }
 
 export const itemsSave = (items, dispatch) => {
@@ -20,6 +21,8 @@ export const itemsSave = (items, dispatch) => {
         type: actionTypes.ITEMS_SAVE,
         itemsSaved: JSON.parse(JSON.stringify(items)),
     });
+
+    renderButtonDisplayText(dispatch);
 }
 
 export const itemsRestore = (itemsSaved, dispatch) => {
@@ -27,6 +30,8 @@ export const itemsRestore = (itemsSaved, dispatch) => {
         type: actionTypes.ITEMS_SET,
         items: JSON.parse(JSON.stringify(itemsSaved)),
     });
+
+    renderButtonDisplayText(dispatch);
 }
 
 export const itemsClear = (items, dispatch) => {
@@ -40,6 +45,8 @@ export const itemsClear = (items, dispatch) => {
         type: actionTypes.ITEMS_SET,
         items: newItems,
     });
+
+    renderButtonDisplayText(dispatch);
 }
 
 export const itemClick = (item, selectState, dispatch) => {
@@ -78,6 +85,13 @@ export const itemClick = (item, selectState, dispatch) => {
                 reachedMax: (!isSelectSingle && currentSelectedCount >= selectState.originalProps.selectRange.max),
                 reachedMin: (!isSelectSingle && currentSelectedCount <= selectState.originalProps.selectRange.min),
             });
+
+            // if single close menu
+            if (selectState.originalProps.selectType === 'SelectSingle') {
+                setModalOpenState(false, dispatch);
+            }
+
+            renderButtonDisplayText(dispatch);
         }
     }
 }
@@ -95,23 +109,8 @@ export const setModalOpenState = (modalIsOpen, dispatch) => {
 /*---------------------------
 | selectState.buttonDisplayText
 ---------------------------*/
-export const renderButtonDisplayText = (selectState, dispatch) => {
-    let buttonDisplayText = selectState.buttonDisplayText;
-    
-    const selectedItems = selectState.items.filter((item) => {
-        return (item.selected);
-    });
-
-    const itemCount = selectedItems.length;
-    
-    if (itemCount > 1) {
-        buttonDisplayText = `${itemCount} ${selectState.originalProps.multiMessage}`;
-    }
-    else if (itemCount === 1) {
-        buttonDisplayText = selectedItems[0].displayText;
-    }
+export const renderButtonDisplayText = (dispatch) => {
     dispatch({
         type: actionTypes.BUTTON_DISPLAY_TEXT_SET,
-        buttonDisplayText: buttonDisplayText,
     });
 }

@@ -89,13 +89,6 @@ const SelectHOC = (WrappedComponent, selectType) => {
         // selectState.items watch - when component changes the selectState.items internal state
         useEffect(() => {
             console.log('Items from selectState has changed', selectState.items);
-            selectActions.renderButtonDisplayText(selectState, dispatch);
-
-            // if single close menu
-            if (selectType === 'SelectSingle') {
-                selectActions.setModalOpenState(false, dispatch);
-            }
-
             onChange(selectState.items);
         }, [selectState.items]);
 
@@ -107,6 +100,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             switch(keycode(e)) {
                 case 'esc':
                     e.preventDefault();
+                    selectActions.itemsRestore(selectState.itemsSaved, dispatch);
                     selectActions.setModalOpenState(false, dispatch);
                     break;
                 default:
@@ -220,6 +214,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         multiMessage: 'Items Selected',
         min: 1,
         max: 1,
+        btnContinueText: 'Continue',
     };
 
     return SelectHOCWrapper;
