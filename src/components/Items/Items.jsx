@@ -6,7 +6,6 @@ import Item from '../Item/Item.jsx';
 
 const Items = React.forwardRef((props, itemsRef) => {
 
-
     const { selectState, dispatch } = useContext(selectContext);
 
     const theClassName = classnames({
@@ -17,7 +16,6 @@ const Items = React.forwardRef((props, itemsRef) => {
         <ItemsStyled
             ref={ itemsRef }
             className={ theClassName }
-            
             role={ 'listbox' }
             tabIndex={ '0' }
             aria-activedescendant={ ( selectState.focusedItem.id) ? `listitem_id_${selectState.focusedItem.id}` : null }
@@ -38,5 +36,5 @@ export default Items;
 ---------------------------*/
 const ItemsStyled = styled.ul`
     margin: 0;
-    padding: 0;
+    padding: 10px 0px;
 `;

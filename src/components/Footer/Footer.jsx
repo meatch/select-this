@@ -59,9 +59,16 @@ export default Footer;
 ---------------------------*/
 const FooterStyled = styled.footer`
     padding: 16px;
-    box-shadow: 0 0 9px rgba(0,0,0,.3);
+    border-top: solid 1px rgba(0,0,0,.3);
 
     button {
+        display: block;
+        background-color: #fff;
+        border-radius: 5px;
+        text-align: center;
+        border: solid 3px ${colors.hue.semiDark};
+        width: 100%;
+
         font-size: 18px;
         line-height: 48px;
     }

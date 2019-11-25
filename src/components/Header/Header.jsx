@@ -118,6 +118,7 @@ export default Header;
 ---------------------------*/
 const HeaderStyled = styled.header`
     padding: 16px;
+    border-bottom: solid 1px rgba(0,0,0,.3);
 
     color: #333;
     font-family: Helvetica;
