@@ -5,7 +5,7 @@
  *
  * Required Props
  * @constant {array} closestSelectors array of css selectors that you would like to click outside of
- *      - Sometiomes you have to specify children of the container.
+ *      - Sometimes you have to specify children of the container.
  * @constant {method} callback call back method to fire when clicking outside of selectors
  *
  * clickOutside.addListener(); //adds Document listener
@@ -45,7 +45,7 @@ export const clickOutside = (closestSelectors, callback) => {
             document.addEventListener('click', listener);
         }
     };
-
+    
     const removeListener = () => {
         if (isListening) {
             isListening = false;

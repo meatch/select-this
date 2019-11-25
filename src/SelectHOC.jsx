@@ -4,6 +4,8 @@ import selectContext from './context/selectContext';
 import selectReducer from './context/selectReducer';
 import * as selectActions from './context/selectActions';
 
+import { clickOutside } from './utilities/clickOutside';
+
 import { SelectThis } from './SelectThisStyles';
 
 import keycode from 'keycode';
@@ -71,7 +73,12 @@ const SelectHOC = (WrappedComponent, selectType) => {
         ---------------------------*/
         // componentDidMount
         useEffect(() => {
-            // console.log('componentDidMount');
+
+            // Only assign DOM Ref once and after mounted.
+            clickOutsideRef.current = clickOutside(['.MenuModal', '.Items, .BtnContinue'], () => {
+                selectActions.itemsSave(selectState.items, dispatch);
+                selectActions.setModalOpenState(false, dispatch);
+            });
         }, []);
 
         // componentDidUpdate
@@ -91,6 +98,20 @@ const SelectHOC = (WrappedComponent, selectType) => {
             console.log('Items from selectState has changed', selectState.items);
             onChange(selectState.items);
         }, [selectState.items]);
+
+
+        // selectState.modalIsOpen watch - when modal opens and closes
+        useEffect(() => {
+            onChange(selectState.items);
+
+            if (selectState.modalIsOpen) {
+                // Add Handler when it opens
+                clickOutsideRef.current.addListener();
+            } else {
+                clickOutsideRef.current.removeListener();
+            }
+
+        }, [selectState.modalIsOpen]);
 
 
         /*---------------------------
@@ -114,7 +135,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         ---------------------------*/        
         const buttonDisplayRef = useRef(null);
         const menuRef = useRef(null);
-        // const itemsRef = useRef(null);
+        const clickOutsideRef = useRef(null);
 
         /*---------------------------
         | Classnames
