@@ -1,4 +1,6 @@
 import { actionTypes } from './selectActionTypes';
+import * as Helpers from '../utilities/helpers';
+
 
 const selectReducer = (selectState, action) => {
     switch(action.type) {
@@ -44,10 +46,7 @@ const selectReducer = (selectState, action) => {
 
             let buttonDisplayText = selectState.buttonDisplayText;
             
-            const selectedItems = selectState.items.filter((item) => {
-                return (item.selected);
-            });
-
+            const selectedItems = Helpers.getSelectedItems(selectState.items);
             const itemCount = selectedItems.length;
             
             if (itemCount > 1) {
