@@ -19,7 +19,7 @@ const Items = React.forwardRef((props, itemsRef) => {
 
         const theKeyCode = keycode(event);
 
-        // handleTypeAhead(theKeyCode);
+        handleTypeAhead(theKeyCode);
 
         if (theKeyCode === 'tab' && selectState.originalProps.selectType === 'SelectSingle') {
             event.preventDefault();
@@ -78,6 +78,7 @@ const Items = React.forwardRef((props, itemsRef) => {
     || 
     || TypeAhead - select element in
             setTimeout(typeAheadFocus, 600); list based on user typing succession of alpha/numeric keystrokes
+            TODO Move to external method? perhaps custom Hook?
     || 
     ===================================*/
     const [ typeAheadTyped, setTypeAheadTyped ] = useState('');
