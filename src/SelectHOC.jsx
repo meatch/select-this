@@ -73,7 +73,6 @@ const SelectHOC = (WrappedComponent, selectType) => {
         ---------------------------*/
         // componentDidMount
         useEffect(() => {
-
             // Only assign DOM Ref once and after mounted.
             clickOutsideRef.current = clickOutside(['.MenuModal', '.Items, .BtnContinue'], () => {
                 selectActions.itemsSave(selectState.items, dispatch);
@@ -88,14 +87,12 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
         // props.items watch - when developer changes items passed to component - overrides internal state
         useEffect(() => {
-            console.log('Items from Props Has Changed');
             selectActions.itemsSet(props.items, dispatch);
         }, [props.items]);
 
 
         // selectState.items watch - when component changes the selectState.items internal state
         useEffect(() => {
-            console.log('Items from selectState has changed', selectState.items);
             onChange(selectState.items);
         }, [selectState.items]);
 
@@ -109,11 +106,15 @@ const SelectHOC = (WrappedComponent, selectType) => {
                 clickOutsideRef.current.addListener();
 
                 // Whenever the modal opens, shift focus to the UL menu
-                console.log('itemsRef', itemsRef);
-                itemsRef.current.focus();
-
-
+                // itemsRef should always trump sibling closing focus to button
+                // So we give it a slight delay - 100 ms seems like a healthy sweet spot.
+                setTimeout(() => {
+                    itemsRef.current.focus();
+                }, 100);
+                
+                
             } else {
+                buttonDisplayRef.current.focus();
                 clickOutsideRef.current.removeListener();
             }
 
