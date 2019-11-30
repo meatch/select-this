@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import Menu from '../Menu/Menu';
 
-const MenuModal = React.forwardRef((props, menuRef) => {
+const MenuModal = (props) => {
     
     // const { selectState, dispatch } = useContext(selectContext);
 
@@ -15,11 +15,11 @@ const MenuModal = React.forwardRef((props, menuRef) => {
 
     return (
         <div className={ theClassName } >
-            <Menu ref={ menuRef }>
+            <Menu>
                 {props.children}
             </Menu>
         </div>
     );
-});
+};
 
 export default MenuModal;

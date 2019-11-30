@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import classnames from 'classnames';
 import MenuModal from '../MenuModal/MenuModal';
 
-const MenuModalWrapper = React.forwardRef((props, menuRef) => {
+const MenuModalWrapper = (props) => {
     
     const { selectState, dispatch } = useContext(selectContext);
 
@@ -20,12 +20,12 @@ const MenuModalWrapper = React.forwardRef((props, menuRef) => {
         >
             {
                 selectState.modalIsOpen &&
-                <MenuModal ref={ menuRef }>
+                <MenuModal>
                     {props.children}
                 </MenuModal>
             }
         </div>
     );
-});
+};
 
 export default MenuModalWrapper;

@@ -107,6 +107,12 @@ const SelectHOC = (WrappedComponent, selectType) => {
             if (selectState.modalIsOpen) {
                 // Add Handler when it opens
                 clickOutsideRef.current.addListener();
+
+                // Whenever the modal opens, shift focus to the UL menu
+                console.log('itemsRef', itemsRef);
+                itemsRef.current.focus();
+
+
             } else {
                 clickOutsideRef.current.removeListener();
             }
@@ -132,9 +138,13 @@ const SelectHOC = (WrappedComponent, selectType) => {
         /*---------------------------
         | DOM Refs with Hooks, no way
         | Using this to manage DOM focus on children - ADA Babay
+        | We want to be able to control focus on the following
+            ButtonDisplay
+            Items (item conntainer UL)
+            Item (current item focused - changes as they interact with list item, or click on an item)
         ---------------------------*/        
         const buttonDisplayRef = useRef(null);
-        const menuRef = useRef(null);
+        const itemsRef = useRef(null);
         const clickOutsideRef = useRef(null);
 
         /*---------------------------
@@ -180,8 +190,8 @@ const SelectHOC = (WrappedComponent, selectType) => {
                         menuModalId={ menuModalId }
                         ref={ buttonDisplayRef }
                     />
-                    <MenuModalWrapper menuModalId={ menuModalId } ref={ menuRef }>
-                        <WrappedComponent { ...props } />
+                    <MenuModalWrapper menuModalId={ menuModalId }>
+                        <WrappedComponent ref={ itemsRef } { ...props } />
                     </MenuModalWrapper>
                 </SelectThis>
             </selectContext.Provider>

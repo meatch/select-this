@@ -1,8 +1,8 @@
 import React from 'react';
-// import styled from "@emotion/styled";
+import styled from "@emotion/styled";
 import classnames from 'classnames';
 
-const Menu = React.forwardRef((props, menuRef) => {
+const Menu = (props) => {
     
     // const { selectState, dispatch } = useContext(selectContext);
 
@@ -11,13 +11,20 @@ const Menu = React.forwardRef((props, menuRef) => {
     });
 
     return (
-        <div
-            ref={ menuRef }
-            className={ theClassName }
-        >
+        <MenuStyled className={ theClassName }>
             {props.children}
-        </div>
+        </MenuStyled>
     );
-});
+};
 
 export default Menu;
+
+/*---------------------------
+| Styles
+---------------------------*/
+const MenuStyled = styled.div`
+    ul {
+        margin: 0;
+        padding: 10px 0px;
+    }
+`;

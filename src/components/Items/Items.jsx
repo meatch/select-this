@@ -13,18 +13,20 @@ const Items = React.forwardRef((props, itemsRef) => {
     });
 
     return (
-        <ItemsStyled
-            ref={ itemsRef }
-            className={ theClassName }
-            role={ 'listbox' }
-            tabIndex={ '0' }
-            aria-activedescendant={ ( selectState.focusedItem.id) ? `listitem_id_${selectState.focusedItem.id}` : null }
-        >
-            {
-                selectState.items.map((item, idx) => {
-                    return <Item key={ idx } item={ item } />
-                })
-            }
+        <ItemsStyled>
+            <ul
+                ref={ itemsRef }
+                className={ theClassName }
+                role={ 'listbox' }
+                tabIndex={ '0' }
+                aria-activedescendant={ ( selectState.focusedItem.id) ? `listitem_id_${selectState.focusedItem.id}` : null }
+            >
+                {
+                    selectState.items.map((item, idx) => {
+                        return <Item key={ idx } item={ item } />
+                    })
+                }
+            </ul>
         </ItemsStyled>
     );
 });
@@ -34,7 +36,9 @@ export default Items;
 /*---------------------------
 | Styles
 ---------------------------*/
-const ItemsStyled = styled.ul`
-    margin: 0;
-    padding: 10px 0px;
+const ItemsStyled = styled.div`
+    ul {
+        margin: 0;
+        padding: 10px 0px;
+    }
 `;
