@@ -83,7 +83,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             // console.log('componentDidUpdate');
         });
 
-        // props.items watch - when developer changes items passed to component - overrides internal state
+        // props.items watch - when developer changes items passed to component - overrides internal state - like starting from scratch
         useEffect(() => {
             selectActions.itemsSet(props.items, dispatch);
         }, [props.items]);

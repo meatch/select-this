@@ -3,9 +3,7 @@ import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import styled from "@emotion/styled";
 import { colors, fonts } from '../../styles';
-
 import classnames from 'classnames';
-import keycode from 'keycode';
 
 const Item = ({item}) => {
 

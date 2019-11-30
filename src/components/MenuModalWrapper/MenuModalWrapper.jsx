@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
-import styled from "@emotion/styled";
 import classnames from 'classnames';
 import MenuModal from '../MenuModal/MenuModal';
 

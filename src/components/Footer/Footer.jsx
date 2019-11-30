@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
-import * as Helpers from '../../utilities/helpers';
 import styled from "@emotion/styled";
 import { colors, fonts } from '../../styles';
 import classnames from 'classnames';
@@ -36,11 +35,15 @@ const Footer = () => {
         }
     };
 
+    const footerClassName = classnames({
+        'BtnContinue': true,
+    });
+
     return (
         <FooterStyled>
             <button
                 type={ 'button' }
-                className={ 'BtnContinue' }
+                className={ footerClassName }
                 tabIndex={ 0 }
 
                 onClick={ handleContinue }

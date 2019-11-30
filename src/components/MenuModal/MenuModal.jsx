@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-// import selectContext from '../../context/selectContext';
-// import styled from "@emotion/styled";
+import React from 'react';
 import classnames from 'classnames';
 
 import Menu from '../Menu/Menu';
