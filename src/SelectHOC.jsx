@@ -3,6 +3,7 @@ import { useId } from "react-id-generator";
 import selectContext from './context/selectContext';
 import selectReducer from './context/selectReducer';
 import * as selectActions from './context/selectActions';
+import * as Helpers from './utilities/helpers';
 
 import { clickOutside } from './utilities/clickOutside';
 
@@ -51,10 +52,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
             itemsSaved: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item...`,
             modalIsOpen: false,
-            focusedItem: {
-                id: null,
-                item: {},
-            },
+            itemActive: {},
             reachedMax: false,
             reachedMin: false,
             originalProps: {
@@ -108,11 +106,19 @@ const SelectHOC = (WrappedComponent, selectType) => {
                 // Whenever the modal opens, shift focus to the UL menu
                 // itemsRef should always trump sibling closing focus to button
                 // So we give it a slight delay - 100 ms seems like a healthy sweet spot.
+                const itemsCurrent = itemsRef.current;
+
                 setTimeout(() => {
-                    itemsRef.current.focus();
+                    itemsCurrent.focus();
                 }, 100);
-                
-                
+
+                // Always Activate first list item for arrow navigation.
+                let domListItemToActivate = itemsCurrent.querySelector('li');
+                const itemToActivate = Helpers.getItemToActivateFromDomListItem(selectState.items, domListItemToActivate);
+
+                if (itemToActivate) {
+                    selectActions.itemActiveSet(itemToActivate, dispatch);
+                }
             } else {
                 buttonDisplayRef.current.focus();
                 clickOutsideRef.current.removeListener();

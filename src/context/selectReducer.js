@@ -30,6 +30,16 @@ const selectReducer = (selectState, action) => {
         }
 
         /*---------------------------
+        | selectState.itemActive
+        ---------------------------*/
+        case (actionTypes.ITEM_ACTIVE_SET): {
+            return {
+                ...selectState,
+                itemActive: action.itemActive,
+            };
+        }
+
+        /*---------------------------
         | selectState.modalIsOpen
         ---------------------------*/
         case (actionTypes.MODAL_SHOW): {

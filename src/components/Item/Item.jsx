@@ -14,6 +14,7 @@ const Item = ({item}) => {
     const tier = (item.tier) ? item.tier : 'tier1';
     const isSelected = (item.selected) ? !!item.selected : false;
     const selectable = (item.selectable) ? !!item.selectable : true;
+    const isActive = (selectState.itemActive.id === item.id);
 
     /*---------------------------
     | Item Handlers
@@ -42,7 +43,8 @@ const Item = ({item}) => {
         [tier] : true,
         'isSelectable': selectable,
         'isSelected': isSelected,
-    })
+        'isActive': isActive,
+    });
 
     /*---------------------------
     | Used as reference to aria-activedescendant in UL root for ADA
@@ -58,7 +60,7 @@ const Item = ({item}) => {
             aria-selected={ isSelected }
             tabIndex={ -1 }
 
-            data-uid={ item.id }
+            data-id={ item.id }
             data-value={ item.value }
             
             onClick={ itemClick }
@@ -109,6 +111,9 @@ const ItemStyled = styled.li`
             color: ${colors.white};
             background-color: ${colors.hue.dark};
         }
+    }
+    &.isActive {
+        outline: dashed 1px red;
     }
 
     &.hasChildren {

@@ -8,6 +8,11 @@ export const actionTypes = {
     ITEMS_UPDATE: 'ITEMS_UPDATE',
 
     /*---------------------------
+    | selectState.itemActive
+    ---------------------------*/
+    ITEM_ACTIVE_SET: 'ITEM_ACTIVE_SET',
+
+    /*---------------------------
     | selectState.modalIsOpen
     ---------------------------*/
     MODAL_SHOW: 'MODAL_SHOW',
