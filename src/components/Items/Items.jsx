@@ -41,6 +41,11 @@ const Items = React.forwardRef((props, itemsRef) => {
                 event.stopPropagation();
                 handleitemsCurrentFocus('next');
                 break;
+            case 'enter':
+            case 'space':
+                event.preventDefault();
+                selectActions.itemClick(selectState.itemActive, selectState, dispatch);
+                break;
             default:
                 return;
         }

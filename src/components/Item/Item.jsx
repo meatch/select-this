@@ -23,18 +23,6 @@ const Item = ({item}) => {
         selectActions.itemClick(item, selectState, dispatch);
     }
 
-    const itemKeyDown = (e) => {
-        switch(keycode(e)) {
-            case 'enter':
-            case 'space':
-                e.preventDefault();
-                itemClick();
-                break;
-            default:
-                return;
-        }
-    };
-
     /*---------------------------
     | Class Names
     ---------------------------*/
@@ -64,7 +52,6 @@ const Item = ({item}) => {
             data-value={ item.value }
             
             onClick={ itemClick }
-            onKeyDown={ itemKeyDown }
 
         >
             { item.displayText }

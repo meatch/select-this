@@ -100,8 +100,6 @@ export const itemClick = (item, selectState, dispatch) => {
 | selectState.itemActive
 ---------------------------*/
 export const itemActiveSet = (itemActive, dispatch) => {
-    console.log('itemActiveSet', itemActive);
-
     dispatch({
         type: actionTypes.ITEM_ACTIVE_SET,
         itemActive: itemActive,
