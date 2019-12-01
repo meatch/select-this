@@ -97,8 +97,6 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
         // selectState.modalIsOpen watch - when modal opens and closes
         useEffect(() => {
-            onChange(selectState.items);
-
             if (selectState.modalIsOpen) {
                 // Add Handler when it opens
                 clickOutsideRef.current.addListener();
