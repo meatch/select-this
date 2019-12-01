@@ -23,6 +23,11 @@ export default Menu;
 | Styles
 ---------------------------*/
 const MenuStyled = styled.div`
+
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+
     ul {
         margin: 0;
         padding: 10px 0px;
