@@ -82,8 +82,8 @@ const Items = React.forwardRef((props, itemsRef) => {
     /*===================================
     || 
     || TypeAhead - select element in
-            setTimeout(typeAheadFocus, 600); list based on user typing succession of alpha/numeric keystrokes
-            TODO Move to external method? perhaps custom Hook?
+        setTimeout(typeAheadFocus, 600); list based on user typing succession of alpha/numeric keystrokes
+        TODO Move to external method? perhaps custom Hook?
     || 
     ===================================*/
     const [ typeAheadTyped, setTypeAheadTyped ] = useState('');
@@ -140,6 +140,22 @@ const Items = React.forwardRef((props, itemsRef) => {
         }
     }, [typeAheadPhase]);
 
+    const renderItems = () => {
+        const itemsJSX = [];
+
+        selectState.items.forEach((item, idx) => {
+            itemsJSX.push(<Item key={ idx } tier='parent' item={ item } />);
+
+            if (item.subItems) {
+                item.subItems.forEach((subItem, subIdx) => {
+                    itemsJSX.push(<Item key={ `${idx}-${subIdx}` } tier='child' item={ subItem } />);
+                });
+            }
+
+        });
+
+        return itemsJSX;
+    }
 
     return (
         <ItemsStyled>
@@ -151,11 +167,7 @@ const Items = React.forwardRef((props, itemsRef) => {
                 aria-activedescendant={ (selectState.itemActive.id) ? `listitem_id_${selectState.itemActive.id}` : null }
                 onKeyDown={ handleMenuKeyDown }
             >
-                {
-                    selectState.items.map((item, idx) => {
-                        return <Item key={ idx } item={ item } />
-                    })
-                }
+                { renderItems() }
             </ul>
         </ItemsStyled>
     );

@@ -5,11 +5,10 @@ import styled from "@emotion/styled";
 import { colors, fonts } from '../../styles';
 import classnames from 'classnames';
 
-const Item = ({item}) => {
+const Item = ({tier, item}) => {
 
     const { selectState, dispatch } = useContext(selectContext);
 
-    const tier = (item.tier) ? item.tier : 'tier1';
     const isSelected = (item.selected) ? !!item.selected : false;
     const selectable = (item.selectable) ? !!item.selectable : true;
     const isActive = (selectState.itemActive.id === item.id);
@@ -84,7 +83,7 @@ const ItemStyled = styled.li`
         }
     }
 
-    &.tier2 {
+    &.child {
         font-weight: normal;
         padding-left: 32px;
     }
