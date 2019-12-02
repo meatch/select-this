@@ -125,8 +125,9 @@ const Items = React.forwardRef((props, itemsRef) => {
             const stringLength = typeAheadTypedRef.current.length;
 
             const itemToActivate = selectState.items.find((item) => {
-                // always compare to start of string so that if someone types 'N' it goes to Novermber, not January.
-                const displayTextChopped = item.displayText.toLowerCase().substr(0, stringLength);
+                // always compare to start of string so that if someone types 'N' it goes to November, not January.
+                const displayText = (typeof item.displayText === 'number') ? item.displayText.toString():item.displayText;
+                const displayTextChopped = displayText.toLowerCase().substr(0, stringLength);
                 return (displayTextChopped === typeAheadTypedRef.current);
             });
 
