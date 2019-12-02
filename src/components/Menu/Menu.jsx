@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from "@emotion/styled";
 import classnames from 'classnames';
 
 const Menu = (props) => {
@@ -11,25 +10,10 @@ const Menu = (props) => {
     });
 
     return (
-        <MenuStyled className={ theClassName }>
+        <div className={ theClassName }>
             {props.children}
-        </MenuStyled>
+        </div>
     );
 };
 
 export default Menu;
-
-/*---------------------------
-| Styles
----------------------------*/
-const MenuStyled = styled.div`
-
-    max-height: 300px;
-    overflow: hidden;
-    overflow-y: auto;
-
-    ul {
-        margin: 0;
-        padding: 10px 0px;
-    }
-`;

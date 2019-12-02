@@ -180,6 +180,10 @@ export default Items;
 ---------------------------*/
 const ItemsStyled = styled.div`
     ul {
+        max-height: 200px;
+        overflow: hidden;
+        overflow-y: auto;
+
         margin: 0;
         padding: 10px 0px;
     }
