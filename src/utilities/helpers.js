@@ -2,7 +2,23 @@
 | Items
 ---------------------------*/
 export const getSelectedItems = (items) => {
-    return items.filter(item => !!item.selected);
+    // Have to account for sub items too, ok to just return a flat array of selected?
+
+    let selected = [];
+
+    items.forEach((item) => {
+        if (!!item.selected) {
+            selected.push(item);
+        }
+
+        (item.subItems) && item.subItems.forEach((subItem) => {
+            if (!!subItem.selected) {
+                selected.push(subItem);
+            }
+        });
+    });
+
+    return selected;
 }
 export const getNumberOfSelected = (items) => {
     const itemsSelected =  getSelectedItems(items);
@@ -20,7 +36,7 @@ export const getItemToActivateFromDomListItem = (items, domListItem) => {
 
     items.forEach(item => {
 
-        (item.subItems) && item.subItems.forEach((subItem, subIdx) => {
+        (item.subItems) && item.subItems.forEach((subItem) => {
             if (subItem.id.toString() === idToSelect) {
                 itemToActivate = subItem;
             }
