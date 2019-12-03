@@ -51,7 +51,20 @@ export const itemsClear = (items, dispatch) => {
 
 export const itemClick = (item, selectState, dispatch) => {
     const selectable = (typeof(item.selectable) !== 'undefined') ? item.selectable : true;
+    const anyOrAll = (typeof(item.anyOrAll) !== 'undefined') ? item.anyOrAll : false;
     const isSelectSingle = selectState.originalProps.selectType === 'SelectSingle';
+
+    let items = [];
+
+    const evaluateItem = (theItem) => {
+        const isNotThisItem = theItem.id !== item.id;
+        // If single, replacement is welcome, so deselect all other items
+        // OR if anyOrAll, use as a clearing to other items selected.
+        // OR we have selected a non anyOrAll, and this item if anyOrAll should be deselected.
+        if (isNotThisItem && (isSelectSingle || anyOrAll || theItem.anyOrAll)) {
+            theItem.selected = false;
+        }
+    }
 
     if (selectable) {
         item.selected = !item.selected;
@@ -60,19 +73,21 @@ export const itemClick = (item, selectState, dispatch) => {
         
         if (item.selected && !selectState.reachedMax)  { canUpdate = true; } // If adding
         if (!item.selected && !selectState.reachedMin) { canUpdate = true; } // If subtracting
+        if (anyOrAll) { canUpdate = true; } // If used to clear, and offer no filters. Any or All options.
         
         if (canUpdate) {
-            const items = selectState.items.map((selectStateItem) => {
-                if (selectStateItem.id === item.id) {
-                    return item;
-                }
-                
-                // If single, replacement is welcome, so deselect all other items
-                if (isSelectSingle) {
-                    selectStateItem.selected = false;
-                }
+            
+            // Cannot ma, as we also need to evaluate subitems.
+            selectState.items.forEach((selectStateItem) => {
+                evaluateItem(selectStateItem);
 
-                return selectStateItem;
+                // Need to include subitems too.
+                (selectStateItem.subItems) && selectStateItem.subItems.forEach((subItem) => {
+                    evaluateItem(subItem);
+                });
+
+                items.push(selectStateItem);
+
             });
 
             // Have we reached max or min?

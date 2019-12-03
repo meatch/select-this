@@ -223,14 +223,15 @@ const SelectHOC = (WrappedComponent, selectType) => {
         /* Items: [
             {
                 # Required Props
-                id: 100, //unique identifier for each item, required to keep them distinct
+                id: 100, //unique identifier/index/key for each item, required to keep them distinct
                 value: 'This is the Value of the Item',
                 displayText: 'What the User Sees for this Item',
                 
                 # Optional Props and their defaults
-                selected: false,
-                selectable: true,
-                tier: 'tier1', // in case you wish to add sub items - due to current state of ADA it flattens out, but classes are assigned for styling.
+                selected: false, // Author can define what item or items can be selected
+                selectable: true, //In case you do not want an item to be selectable, like a subitem header.
+                tier: 'tier1', // in case you wish to add sub items - due to current state of ADA it flattens out DOM LI's, and classes are assigned for styling purposes.
+                anyOrAll: false, // Any or All Items (e.g. no filters). A flagged item that when set to true and clicked will clear all other items. When user clicks clear all, it also preserves this item. It also does not count against min or max selection.
             },
             ...
         ]
