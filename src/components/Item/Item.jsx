@@ -1,17 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import styled from "@emotion/styled";
 import { colors, fonts } from '../../styles';
 import classnames from 'classnames';
+import _uniqueId from 'lodash/uniqueId';
 
 const Item = ({tier, item}) => {
 
     const { selectState, dispatch } = useContext(selectContext);
+    const [id] = useState(_uniqueId('listitem-'));
 
     const isSelected = (item.selected) ? !!item.selected : false;
     const selectable = (item.selectable) ? !!item.selectable : true;
-    const isActive = (selectState.itemActive.id === item.id);
+    const isActive = (selectState.itemActive.item.id === item.id);
 
     /*---------------------------
     | Item Handlers
@@ -31,14 +33,9 @@ const Item = ({tier, item}) => {
         'isActive': isActive,
     });
 
-    /*---------------------------
-    | Used as reference to aria-activedescendant in UL root for ADA
-    ---------------------------*/
-    const itemUniqueIDKey = `listitem_id_${item.id}`;
-
     return (
         <ItemStyled
-            id={ itemUniqueIDKey }
+            id={ id }
             className={ theItemClassName }
 
             role={ 'option' }

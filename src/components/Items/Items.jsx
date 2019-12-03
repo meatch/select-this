@@ -44,7 +44,7 @@ const Items = React.forwardRef((props, itemsRef) => {
             case 'enter':
             case 'space':
                 event.preventDefault();
-                selectActions.itemClick(selectState.itemActive, selectState, dispatch);
+                selectActions.itemClick(selectState.itemActive.item, selectState, dispatch);
                 break;
             default:
                 return;
@@ -69,10 +69,11 @@ const Items = React.forwardRef((props, itemsRef) => {
 
         // get item from our internal items array based on id
         const itemToActivate = Helpers.getItemToActivateFromDomListItem(selectState.items, nextItem);
+        const domID = nextItem.id;
 
         // Activate Item
         if (itemToActivate) {
-            selectActions.itemActiveSet(itemToActivate, dispatch);
+            selectActions.itemActiveSet(itemToActivate, domID, dispatch);
         }
 
         return nextItem;
@@ -132,7 +133,9 @@ const Items = React.forwardRef((props, itemsRef) => {
             });
 
             if (itemToActivate) {
-                selectActions.itemActiveSet(itemToActivate, dispatch);
+                const itemsCurrent = itemsRef.current;
+                const domID = itemsCurrent.querySelector(`li[data-id="${itemToActivate.id}"]`).id;
+                selectActions.itemActiveSet(itemToActivate, domID, dispatch);
             }
 
             setTypeAheadTyped('');
@@ -164,7 +167,7 @@ const Items = React.forwardRef((props, itemsRef) => {
                 className={ theClassName }
                 role={ 'listbox' }
                 tabIndex={ '0' }
-                aria-activedescendant={ (selectState.itemActive.id) ? `listitem_id_${selectState.itemActive.id}` : null }
+                aria-activedescendant={ (selectState.itemActive.domID) ? selectState.itemActive.domID : null }
                 onKeyDown={ handleMenuKeyDown }
             >
                 { renderItems() }

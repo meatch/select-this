@@ -52,7 +52,10 @@ const SelectHOC = (WrappedComponent, selectType) => {
             itemsSaved: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item...`,
             modalIsOpen: false,
-            itemActive: {},
+            itemActive: {
+                item: {},
+                domID: '',
+            },
             reachedMax: false,
             reachedMin: false,
             originalProps: {
@@ -112,10 +115,11 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
                 // Always Activate first list item for arrow navigation.
                 let domListItemToActivate = itemsCurrent.querySelector('li');
+                const domID = domListItemToActivate.id;
                 const itemToActivate = Helpers.getItemToActivateFromDomListItem(selectState.items, domListItemToActivate);
 
                 if (itemToActivate) {
-                    selectActions.itemActiveSet(itemToActivate, dispatch);
+                    selectActions.itemActiveSet(itemToActivate, domID, dispatch);
                 }
             } else {
                 buttonDisplayRef.current.focus();

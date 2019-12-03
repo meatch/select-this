@@ -99,10 +99,13 @@ export const itemClick = (item, selectState, dispatch) => {
 /*---------------------------
 | selectState.itemActive
 ---------------------------*/
-export const itemActiveSet = (itemActive, dispatch) => {
+export const itemActiveSet = (item, domID, dispatch) => {
     dispatch({
         type: actionTypes.ITEM_ACTIVE_SET,
-        itemActive: itemActive,
+        itemActive: {
+            item: item,
+            domID: domID,
+        }
     });
 }
 
