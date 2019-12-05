@@ -4,14 +4,10 @@ import selectContext from './context/selectContext';
 import selectReducer from './context/selectReducer';
 import * as selectActions from './context/selectActions';
 import * as Helpers from './utilities/helpers';
-
 import { clickOutside } from './utilities/clickOutside';
-
 import { SelectThis } from './SelectThisStyles';
-
 import keycode from 'keycode';
 import classnames from 'classnames';
-
 import HiddenInputs from './components/HiddenInputs/HiddenInputs';
 import AriaLabel from './components/AriaLabel/AriaLabel';
 import ButtonDisplay from './components/ButtonDisplay/ButtonDisplay';

@@ -3,7 +3,7 @@ import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import * as helpers from '../../utilities/helpers';
 import styled from "@emotion/styled";
-import { colors, fonts } from '../../styles';
+import { colors, fonts } from '../../SelectThisStyles';
 
 import classnames from 'classnames';
 import keycode from 'keycode';

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import selectContext from '../../context/selectContext';
 import * as selectActions from '../../context/selectActions';
 import styled from "@emotion/styled";
-import { colors, fonts } from '../../styles';
+import { colors, fonts } from '../../SelectThisStyles';
 import classnames from 'classnames';
 import keycode from 'keycode';
 

@@ -1,7 +1,31 @@
 import styled from "@emotion/styled";
 
+export const colors = {
+    white: '#fff',
+    black: '#000',
+    neutral: {
+        light: '#ccc',
+        semiLight: '#eee',
+        mid: '#999',
+        semiDark: '#666',
+        dark: '#333',
+    },
+    hue: {
+        light: '#acdcf1',
+        semiLight: '#79c2e4',
+        mid: '#4596bb',
+        semiDark: '#206a8c',
+        dark: '#0a364b',
+    },
+}
+
+export const fonts = {
+    primary: 'Helvetica, sans-serif',
+    secondary: 'Georgia, serif',
+}
+
 export const SelectThis = styled.div`
-    font-family: Helvetica;
+    font-family: ${fonts.primary};
     position: relative;
     width: 100%;
 
@@ -68,5 +92,20 @@ export const SelectThis = styled.div`
             margin-top: 10px;
             position: relative;
         }
+    }
+
+    /* https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034 */
+    .sr-only {
+        border: 0 !important;
+        clip: rect(1px, 1px, 1px, 1px) !important;
+        -webkit-clip-path: inset(50%) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        width: 1px !important;
+        white-space: nowrap !important;
     }
 `;

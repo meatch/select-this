@@ -5,6 +5,11 @@ import * as Helpers from '../../utilities/helpers';
 import styled from "@emotion/styled";
 import keycode from 'keycode';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faTimes
+} from '@fortawesome/free-solid-svg-icons';
+
 const Header = () => {
 
     const { selectState, dispatch } = useContext(selectContext);
@@ -81,13 +86,13 @@ const Header = () => {
         <HeaderStyled>
             <button
                 tabIndex={ 0 }
-                aria-label={ `Close the Select a ${ selectState.originalProps.label } Drop Down` }
                 type={ 'button' }
                 className={ 'close' }
                 onClick={ handleClose }
                 onKeyDown={ handleCloseKeyDown }
             >
-                <span aria-hidden>X</span>
+                <span className={ 'sr-only' }>{ `Close the Select a ${ selectState.originalProps.label } Drop Down` }</span>
+                <FontAwesomeIcon icon={faTimes} className={ 'close-button-icon' } aria-hidden />
             </button>
             <h2>Select <span className={ 'title' }>{ selectState.originalProps.label }</span>(s)</h2>
             <aside>
@@ -131,12 +136,27 @@ const HeaderStyled = styled.header`
         width: 22px; height: 22px;
 
         color: #333;
-        /* background-image: url(/img/closeLrg_black.png);
-        background-size: contain;
-        background-color: transparent; */
-        /* font-size: 0; */
+
+        padding: 0;
+        margin: 0;
+
+        outline: none;
+        border: none;
+
+        background-color: transparent;
+
 
         &:hover { opacity: 1; }
+        &:focus { 
+            opacity: 1; 
+            outline: dotted 1px gray;
+            outline-offset: 3px;
+        }
+
+        svg.close-button-icon {
+            display: block;
+            width: 100%; height: 100%;
+        }
     }
     h2 {
         margin: 0 0 5px;
@@ -161,6 +181,5 @@ const HeaderStyled = styled.header`
             font-family: Helvetica;
             margin-left: 12px;
         }
-
     }
 `;
