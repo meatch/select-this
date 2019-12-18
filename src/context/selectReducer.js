@@ -28,6 +28,12 @@ const selectReducer = (selectState, action) => {
                 reachedMin: action.reachedMin,
             };
         }
+        case (actionTypes.ITEMS_CLEAR): {
+            return {
+                ...selectState,
+                items: JSON.parse(JSON.stringify(selectState.itemsOriginal)), // Cloned no refs.
+            };
+        }
 
         /*---------------------------
         | selectState.itemActive

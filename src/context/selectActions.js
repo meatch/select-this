@@ -34,18 +34,8 @@ export const itemsRestore = (itemsSaved, dispatch) => {
     renderButtonDisplayText(dispatch);
 }
 
-export const itemsClear = (items, dispatch) => {
-
-    const newItems = items.map((item) => {
-        item.selected = false;
-        return item;
-    });
-
-    dispatch({
-        type: actionTypes.ITEMS_SET,
-        items: newItems,
-    });
-
+export const itemsClear = (dispatch) => {
+    dispatch({ type: actionTypes.ITEMS_CLEAR });
     renderButtonDisplayText(dispatch);
 }
 

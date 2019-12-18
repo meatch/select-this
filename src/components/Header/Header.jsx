@@ -23,7 +23,7 @@ const Header = () => {
     }
     const itemsClear = () => {
         // remove all selections
-        selectActions.itemsClear(selectState.items, dispatch);
+        selectActions.itemsClear(dispatch);
     }
 
     const handleClearAllKeyDown = (e) => {

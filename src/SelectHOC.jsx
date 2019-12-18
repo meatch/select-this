@@ -44,8 +44,9 @@ const SelectHOC = (WrappedComponent, selectType) => {
         | Default Store/Object Shape
         ---------------------------*/
         const defaultStore = {
-            items: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
-            itemsSaved: JSON.parse(JSON.stringify(items)), //should be cloned versions, not links.
+            items: JSON.parse(JSON.stringify(items)), // Cloned no refs.
+            itemsSaved: JSON.parse(JSON.stringify(items)), // Cloned no refs. This is used to undo last set of changes
+            itemsOriginal: JSON.parse(JSON.stringify(items)), // Cloned no refs. This is used to reset to original state - clearing items
             buttonDisplayText: (buttonDisplayTextDefault) ? buttonDisplayTextDefault : `Select an item...`,
             modalIsOpen: false,
             itemActive: {
