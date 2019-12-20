@@ -34,54 +34,60 @@ export const itemsRestore = (itemsSaved, dispatch) => {
     renderButtonDisplayText(dispatch);
 }
 
-export const itemsClear = (dispatch) => {
-    dispatch({ type: actionTypes.ITEMS_CLEAR });
+export const itemsReset = (dispatch) => {
+    dispatch({ type: actionTypes.ITEMS_RESET });
     renderButtonDisplayText(dispatch);
 }
 
 export const itemClick = (item, selectState, dispatch) => {
+    const isSelectSingle = selectState.originalProps.selectType === 'SelectSingle';
     const selectable = (typeof(item.selectable) !== 'undefined') ? item.selectable : true;
     const anyOrAll = (typeof(item.anyOrAll) !== 'undefined') ? item.anyOrAll : false;
-    const isSelectSingle = selectState.originalProps.selectType === 'SelectSingle';
-
-    let items = [];
 
     const evaluateItem = (theItem) => {
-        const isNotThisItem = theItem.id !== item.id;
-        // If single, replacement is welcome, so deselect all other items
-        // OR if anyOrAll, use as a clearing to other items selected.
-        // OR we have selected a non anyOrAll, and this item if anyOrAll should be deselected.
-        if (isNotThisItem && (isSelectSingle || anyOrAll || theItem.anyOrAll)) {
+        const isItemClicked = theItem.id === item.id;
+        
+        if (isItemClicked) {
+            theItem.selected = !theItem.selected;
+        } else if (isSelectSingle || anyOrAll || theItem.anyOrAll) {
+            // If single, replacement is welcome, so deselect all other items
+            // OR if anyOrAll, use as a clearing to other items selected.
+            // OR we have selected a non anyOrAll, and this item if anyOrAll should be deselected.
             theItem.selected = false;
         }
+
+        return theItem;
     }
 
     if (selectable) {
-        item.selected = !item.selected;
-
+        // Let's assume we cannot update
         let canUpdate = false;
         
-        if (item.selected && !selectState.reachedMax)  { canUpdate = true; } // If adding
-        if (!item.selected && !selectState.reachedMin) { canUpdate = true; } // If subtracting
+        if (!item.selected && !selectState.reachedMax) { canUpdate = true; } // If adding
+        if (item.selected && !selectState.reachedMin) { canUpdate = true; } // If subtracting
         if (anyOrAll) { canUpdate = true; } // If used to clear, and offer no filters. Any or All options.
+
+        console.log('Can Update', canUpdate, item.selected, selectState.reachedMax, selectState.reachedMin, anyOrAll);
         
         if (canUpdate) {
-            
-            // Cannot ma, as we also need to evaluate subitems.
-            selectState.items.forEach((selectStateItem) => {
-                evaluateItem(selectStateItem);
+            // Map to clone, so we manage pure state
+            const items = selectState.items.map((selectStateItem) => {
 
-                // Need to include subitems too.
-                (selectStateItem.subItems) && selectStateItem.subItems.forEach((subItem) => {
-                    evaluateItem(subItem);
-                });
+                // Need to include subitems too if they exist
+                if (selectStateItem.subItems) {
+                    const newSubItems = selectStateItem.subItems.map((subItem) => {
+                        return evaluateItem(subItem);
+                    });
 
-                items.push(selectStateItem);
+                    selectStateItem.subItems = newSubItems;
+                }
+
+                return evaluateItem(selectStateItem);
 
             });
 
             // Have we reached max or min?
-            const currentSelected = Helpers.getSelectedItems(selectState.items);
+            const currentSelected = Helpers.getSelectedItems(items);
             const currentSelectedCount = currentSelected.length;
 
             dispatch({

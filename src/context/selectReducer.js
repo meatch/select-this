@@ -28,10 +28,12 @@ const selectReducer = (selectState, action) => {
                 reachedMin: action.reachedMin,
             };
         }
-        case (actionTypes.ITEMS_CLEAR): {
+        case (actionTypes.ITEMS_RESET): {
             return {
                 ...selectState,
                 items: JSON.parse(JSON.stringify(selectState.itemsOriginal)), // Cloned no refs.
+                reachedMax: false,
+                reachedMin: false,
             };
         }
 

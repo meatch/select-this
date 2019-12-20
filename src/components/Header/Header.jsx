@@ -21,17 +21,17 @@ const Header = () => {
         selectActions.itemsRestore(selectState.itemsSaved, dispatch);
         selectActions.setModalOpenState(false, dispatch);
     }
-    const itemsClear = () => {
+    const itemsReset = () => {
         // remove all selections
-        selectActions.itemsClear(dispatch);
+        selectActions.itemsReset(dispatch);
     }
 
-    const handleClearAllKeyDown = (e) => {
+    const handleResetKeyDown = (e) => {
         switch(keycode(e)) {
             case 'enter':
             case 'space':
                 e.preventDefault();
-                itemsClear();
+                itemsReset();
                 break;
             default:
                 return;
@@ -100,14 +100,14 @@ const Header = () => {
                     renderMaxSelectionText()
                 })</span>
                 <span
-                    onClick={ itemsSelected.length > 0 ? itemsClear : null }
-                    onKeyDown={ itemsSelected.length > 0 ? handleClearAllKeyDown : null }
-                    aria-label={ 'Clear All Selections' }
-                    className={ 'clearAll' }
+                    onClick={ itemsSelected.length > 0 ? itemsReset : null }
+                    onKeyDown={ itemsSelected.length > 0 ? handleResetKeyDown : null }
+                    aria-label={ 'Reset Selections' }
+                    className={ 'reset' }
                     tabIndex={ itemsSelected.length > 0 ? '0' : null }
                     hidden={ itemsSelected.length === 0 }
                 >
-                    { itemsSelected.length > 0 && 'Clear all' }
+                    { itemsSelected.length > 0 && 'Reset' }
                 </span>
             </aside>
         </HeaderStyled>
@@ -175,7 +175,7 @@ const HeaderStyled = styled.header`
             font-weight: bold;
             color: black;
         }
-        .clearAll {
+        .reset {
             cursor: pointer;
             color: teal;
             font-family: Helvetica;

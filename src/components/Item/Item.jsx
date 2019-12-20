@@ -19,6 +19,7 @@ const Item = ({tier, item}) => {
     | Item Handlers
     ---------------------------*/
     const itemClick = () => {
+        console.log('itemClick', item, selectState, dispatch);
         selectActions.itemClick(item, selectState, dispatch);
     }
 
