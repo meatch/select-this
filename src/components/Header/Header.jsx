@@ -137,7 +137,6 @@ const HeaderStyled = styled.header`
 
     button.close {
         display: block;
-        opacity: .7;
 
         position: absolute;
         top: 16px; right: 16px;
@@ -149,18 +148,12 @@ const HeaderStyled = styled.header`
         padding: 0;
         margin: 0;
 
-        outline: none;
         border: none;
 
         background-color: transparent;
 
-
-        &:hover { opacity: 1; }
-        &:focus { 
-            opacity: 1; 
-            outline: dotted 1px gray;
-            outline-offset: 3px;
-        }
+        opacity: .7;
+        &:hover, &:focus { opacity: 1; }
 
         svg.close-button-icon {
             display: block;

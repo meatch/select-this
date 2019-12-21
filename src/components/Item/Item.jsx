@@ -88,9 +88,6 @@ const ItemStyled = styled.li`
             background-color: ${colors.hue.dark};
         }
     }
-    &.isActive {
-        outline: dashed 1px red;
-    }
 
     &.parent {
         font-weight: bold;

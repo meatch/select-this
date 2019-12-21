@@ -171,10 +171,9 @@ const ButtonDisplayStyled = styled.div`
             }
         }
 
-        &:focus, 
-        &:active, 
+        &:focus,
+        &:active,
         &:hover { 
-            outline: none;
             color: ${colors.hue.semiDark};
             border-color: ${colors.hue.semiDark};
         }

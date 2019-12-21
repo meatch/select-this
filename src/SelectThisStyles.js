@@ -29,6 +29,16 @@ export const SelectThis = styled.div`
     position: relative;
     width: 100%;
 
+    *:focus, .isActive {
+        outline: solid 2px rgba(61, 120, 136, 0.75);
+        outline-offset: 3px;
+        box-shadow: 0px 0px 0px 3px rgba(135, 229, 255, 0.34);
+    }
+    .isActive {
+        outline-offset: -3px;
+        box-shadow: inset 0px 0px 0px 3px rgba(135, 229, 255, 0.75);
+    }
+
     &.modalIsOpen {
         position: relative;
 
