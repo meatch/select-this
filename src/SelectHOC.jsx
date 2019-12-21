@@ -72,7 +72,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         // componentDidMount
         useEffect(() => {
             // Only assign DOM Ref once and after mounted.
-            clickOutsideRef.current = clickOutside(['.MenuModal', '.Items, .BtnContinue'], () => {
+            clickOutsideRef.current = clickOutside(['.MenuModal', '.Items, .BtnContinue, .reset'], () => {
                 selectActions.itemsSave(selectState.items, dispatch);
                 selectActions.setModalOpenState(false, dispatch);
             });

@@ -68,7 +68,6 @@ const Header = () => {
         // Min
         // const reachedMin = selectState.reachedMin;
         // const minSelection = selectState.originalProps.min;
-
         
         const itemCount = itemsSelected.length;
 
@@ -79,8 +78,29 @@ const Header = () => {
         } else if (reachedMax) {
             maxSelectionText = `${itemCount} selected, max reached`;
         }
-        return maxSelectionText;
+
+        return <span className={ 'maxSelection' }>{maxSelectionText}</span>;
     };
+
+    const renderReset = () => {
+        // only offer reset if original items does not match current items - low level comparison
+        const isOriginal = (JSON.stringify(selectState.items) === JSON.stringify(selectState.itemsOriginal)); 
+
+        return (isOriginal) 
+            ? '' 
+            : (
+                    <span
+                        onClick={ itemsSelected.length > 0 ? itemsReset : null }
+                        onKeyDown={ itemsSelected.length > 0 ? handleResetKeyDown : null }
+                        aria-label={ `${ selectState.originalProps.label.resetText} Selections` }
+                        className={ 'reset' }
+                        tabIndex={ itemsSelected.length > 0 ? '0' : null }
+                        hidden={ itemsSelected.length === 0 }
+                    >
+                        { itemsSelected.length > 0 && selectState.originalProps.resetText }
+                    </span>
+                );
+    }
 
     return (
         <HeaderStyled>
@@ -96,19 +116,8 @@ const Header = () => {
             </button>
             <h2>Select <span className={ 'title' }>{ selectState.originalProps.pluralName }</span></h2>
             <aside>
-                <span className={ 'maxSelection' }>({
-                    renderMaxSelectionText()
-                })</span>
-                <span
-                    onClick={ itemsSelected.length > 0 ? itemsReset : null }
-                    onKeyDown={ itemsSelected.length > 0 ? handleResetKeyDown : null }
-                    aria-label={ `${ selectState.originalProps.label.resetText} Selections` }
-                    className={ 'reset' }
-                    tabIndex={ itemsSelected.length > 0 ? '0' : null }
-                    hidden={ itemsSelected.length === 0 }
-                >
-                    { itemsSelected.length > 0 && selectState.originalProps.resetText }
-                </span>
+                { renderMaxSelectionText() }
+                { renderReset() }
             </aside>
         </HeaderStyled>
     );
