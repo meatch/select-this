@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer.jsx';
 export const SelectMulti = SelectHOC(React.forwardRef((props, itemsRef) => {
     return (
         <>
-            <Header />
+            <Header ref={ itemsRef } />
             <Items ref={ itemsRef } />
             <Footer />
         </>

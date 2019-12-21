@@ -10,7 +10,7 @@ import {
     faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
-const Header = () => {
+const Header = React.forwardRef((props, itemsRef) => {
 
     const { selectState, dispatch } = useContext(selectContext);
 
@@ -24,6 +24,7 @@ const Header = () => {
     const itemsReset = () => {
         // remove all selections
         selectActions.itemsReset(dispatch);
+        itemsRef.current.focus();
     }
 
     const handleResetKeyDown = (e) => {
@@ -121,7 +122,7 @@ const Header = () => {
             </aside>
         </HeaderStyled>
     );
-}
+});
 
 export default Header;
 
