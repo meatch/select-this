@@ -6,7 +6,7 @@ import { colors, fonts } from '../../SelectThisStyles';
 import classnames from 'classnames';
 import _uniqueId from 'lodash/uniqueId';
 
-const Item = ({tier, item}) => {
+const Item = ({item}) => {
 
     const { selectState, dispatch } = useContext(selectContext);
     const [id] = useState(_uniqueId('listitem-'));
@@ -19,7 +19,6 @@ const Item = ({tier, item}) => {
     | Item Handlers
     ---------------------------*/
     const itemClick = () => {
-        console.log('itemClick', item, selectState, dispatch);
         selectActions.itemClick(item, selectState, dispatch);
     }
 
@@ -28,7 +27,7 @@ const Item = ({tier, item}) => {
     ---------------------------*/
     const theItemClassName = classnames({
         'Item': true,
-        [tier] : true,
+        [item.className] : item.className,
         'isSelectable': selectable,
         'isSelected': isSelected,
         'isActive': isActive,
@@ -81,11 +80,6 @@ const ItemStyled = styled.li`
         }
     }
 
-    &.child {
-        font-weight: normal;
-        padding-left: 32px;
-    }
-
     &.isSelected {
         color: ${colors.white};
         background-color: ${colors.hue.semiDark};
@@ -98,7 +92,12 @@ const ItemStyled = styled.li`
         outline: dashed 1px red;
     }
 
-    &.hasChildren {
+    &.parent {
         font-weight: bold;
+    }
+
+    &.tier1 {
+        font-weight: normal;
+        padding-left: 32px;
     }
 `;

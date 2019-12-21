@@ -94,7 +94,7 @@ const Header = () => {
                 <span className={ 'sr-only' }>{ `Close the Select a ${ selectState.originalProps.label } Drop Down` }</span>
                 <FontAwesomeIcon icon={faTimes} className={ 'close-button-icon' } aria-hidden />
             </button>
-            <h2>Select <span className={ 'title' }>{ selectState.originalProps.label }</span>(s)</h2>
+            <h2>Select <span className={ 'title' }>{ selectState.originalProps.pluralName }</span></h2>
             <aside>
                 <span className={ 'maxSelection' }>({
                     renderMaxSelectionText()
@@ -102,12 +102,12 @@ const Header = () => {
                 <span
                     onClick={ itemsSelected.length > 0 ? itemsReset : null }
                     onKeyDown={ itemsSelected.length > 0 ? handleResetKeyDown : null }
-                    aria-label={ 'Reset Selections' }
+                    aria-label={ `${ selectState.originalProps.label.resetText} Selections` }
                     className={ 'reset' }
                     tabIndex={ itemsSelected.length > 0 ? '0' : null }
                     hidden={ itemsSelected.length === 0 }
                 >
-                    { itemsSelected.length > 0 && 'Reset' }
+                    { itemsSelected.length > 0 && selectState.originalProps.resetText }
                 </span>
             </aside>
         </HeaderStyled>

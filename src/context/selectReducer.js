@@ -68,7 +68,7 @@ const selectReducer = (selectState, action) => {
             const itemCount = selectedItems.length;
             
             if (itemCount > 1) {
-                buttonDisplayText = `${itemCount} ${selectState.originalProps.multiMessage}`;
+                buttonDisplayText = `${itemCount} ${selectState.originalProps.pluralName} selected`;
             } else if (itemCount === 1) {
                 buttonDisplayText = selectedItems[0].displayText;
             } else if (itemCount === 0)  {

@@ -44,21 +44,6 @@ export const itemClick = (item, selectState, dispatch) => {
     const selectable = (typeof(item.selectable) !== 'undefined') ? item.selectable : true;
     const anyOrAll = (typeof(item.anyOrAll) !== 'undefined') ? item.anyOrAll : false;
 
-    const evaluateItem = (theItem) => {
-        const isItemClicked = theItem.id === item.id;
-        
-        if (isItemClicked) {
-            theItem.selected = !theItem.selected;
-        } else if (isSelectSingle || anyOrAll || theItem.anyOrAll) {
-            // If single, replacement is welcome, so deselect all other items
-            // OR if anyOrAll, use as a clearing to other items selected.
-            // OR we have selected a non anyOrAll, and this item if anyOrAll should be deselected.
-            theItem.selected = false;
-        }
-
-        return theItem;
-    }
-
     if (selectable) {
         // Let's assume we cannot update
         let canUpdate = false;
@@ -67,23 +52,20 @@ export const itemClick = (item, selectState, dispatch) => {
         if (item.selected && !selectState.reachedMin) { canUpdate = true; } // If subtracting
         if (anyOrAll) { canUpdate = true; } // If used to clear, and offer no filters. Any or All options.
 
-        console.log('Can Update', canUpdate, item.selected, selectState.reachedMax, selectState.reachedMin, anyOrAll);
-        
         if (canUpdate) {
             // Map to clone, so we manage pure state
             const items = selectState.items.map((selectStateItem) => {
-
-                // Need to include subitems too if they exist
-                if (selectStateItem.subItems) {
-                    const newSubItems = selectStateItem.subItems.map((subItem) => {
-                        return evaluateItem(subItem);
-                    });
-
-                    selectStateItem.subItems = newSubItems;
+                const isItemClicked = selectStateItem.id === item.id;
+        
+                if (isItemClicked) {
+                    selectStateItem.selected = !selectStateItem.selected;
+                } else if (isSelectSingle || anyOrAll || selectStateItem.anyOrAll) {
+                    // If single, replacement is welcome, so deselect all other items
+                    // OR if anyOrAll, use as a clearing to other items selected.
+                    // OR we have selected a non anyOrAll, and this item if anyOrAll should be deselected.
+                    selectStateItem.selected = false;
                 }
-
-                return evaluateItem(selectStateItem);
-
+                return selectStateItem;
             });
 
             // Have we reached max or min?

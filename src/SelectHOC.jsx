@@ -216,6 +216,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
         ariaLabel: null,
         labelID: null,
         labelSrOnly: null,
+
         
         /* Items: [
             {
@@ -225,15 +226,15 @@ const SelectHOC = (WrappedComponent, selectType) => {
                 displayText: 'What the User Sees for this Item',
                 
                 # Optional Props and their defaults
+                className: null, //optional className, good for creating Pseudo tiers (due to ADA and general complexity, submenus are not possible)
                 selected: false, // Author can define what item or items can be selected
                 selectable: true, //In case you do not want an item to be selectable, like a subitem header.
-                tier: 'tier1', // in case you wish to add sub items - due to current state of ADA it flattens out DOM LI's, and classes are assigned for styling purposes.
                 anyOrAll: false, // Any or All Items (e.g. no filters). A flagged item that when set to true and clicked will clear all other items. When user clicks clear all, it also preserves this item. It also does not count against min or max selection.
             },
             ...
         ]
         */
-        items: [], //master list of options and their current selected state
+        items: [], //master array of option objects and their current selected state
         
         // Hidden Inputs
         inputName: 'selectThisItem', //for hidden input(s) and standard form submission
@@ -241,6 +242,7 @@ const SelectHOC = (WrappedComponent, selectType) => {
 
         // ButtonDisplay
         buttonDisplayTextDefault : null, //Default text for Toggle Button if nothing is selected
+        pluralName: 'Items', //When user selects more than one item, how do you want it to read? e.g. 12 Items Selected, 3 Fruit Selected
 
         // Alignment of dropdown list and pyramid that visually connects modal to btnHeroText
         alignModal: 'right',
@@ -249,10 +251,10 @@ const SelectHOC = (WrappedComponent, selectType) => {
         onChange: () => { return; },
 
         // SelectMulti
-        multiMessage: 'Items Selected',
         min: 1,
         max: 1,
         btnContinueText: 'Continue',
+        resetText: 'Reset',
     };
 
     return SelectHOCWrapper;
