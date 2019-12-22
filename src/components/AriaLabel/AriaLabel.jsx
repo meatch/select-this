@@ -5,6 +5,8 @@ import styled from "@emotion/styled";
 const AriaLabel = ({labelID}) => {
     const { selectState } = useContext(SelectContext);
 
+    if (!selectState.originalProps.ariaLabel) { return ''; }
+
     return (
         <AriaLabelStyled
             id={ labelID }
